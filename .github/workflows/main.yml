@@ -5,14 +5,15 @@ env:
   SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
   
 on: push
-name: 🚀 Deploy to production
+name: "🚀 Deploy to production"
 jobs:
   deploy:
+    name: "🚚 Deploy sourcecode to production"
     runs-on: ubuntu-latest
     steps:
-    - name: "⚙️ Preparing for sftp deployment"
+    - name: "⌛ Checking out the code"
       uses: actions/checkout@v3
-    - name: "⚙️ Getting node"
+    - name: "⚙️ Polishing the gears"
       uses: actions/setup-node@v3
       with:
         node-version: '14'
