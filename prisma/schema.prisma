@@ -47,3 +47,8 @@ model Progress {
 
   user User @relation(fields: [id], references: [id])
 }
+
+model Levels {
+  level Int @id @unique // relation scalar field 
+  xp Int @default(0)
+}
