@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Model
+
+// Server configuration
+model Server {
+  id BigInt @id @unique
+
+  loggingChannel Int @unique 
+}
+
+
+model User {
+  id BigInt @id @unique
+  firstSeen DateTime @default(now())
+
+  perms Int @default(1)
+  
+  // User might have activity information
+  activity Activity?
+  // User might have progress (level/xp) information
+  progress Progress?
+}
+
+model Activity {
+  id BigInt @id @unique // relation scalar field 
+  
+  updatedAt DateTime @updatedAt
+  messages Int @default(0)
+  minutes Int @default(0)
+  
+  user User @relation(fields: [id], references: [id])
+}
+
+model Progress {
+  id BigInt @id @unique // relation scalar field 
+  
+  level Int @default(1)
+  xp Int @default(0)
+
+  user User @relation(fields: [id], references: [id])
+}
