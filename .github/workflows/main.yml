@@ -1,0 +1,25 @@
+env:
+  SFTP_HOST: ${{ secrets.FTP_SERVER }}
+  SFTP_PORT: ${{ secrets.FTP_PORT }}
+  SFTP_USER: ${{ secrets.FTP_USERNAME }}
+  SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+  
+on: push
+name: 🚀 Deploy to production
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: "⚙️ Preparing for sftp deployment"
+      uses: actions/checkout@v3
+    - name: "⚙️ Getting node"
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    - name: "📦 Getting dependencies (1/2)"
+      run: npm install dotenv
+    - name: "📦 Getting dependencies (2/2)"
+      run: npm install sftp-upload
+    - name: "📁 Sending project files to production"
+      run: npm run deploy
+      
