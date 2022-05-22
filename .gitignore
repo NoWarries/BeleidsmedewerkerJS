@@ -12,6 +12,7 @@ jspm_packages/
 
 # IDE specific
 .idea
+.vscode
 
 # Sensitive
 .env
