@@ -4,7 +4,11 @@ env:
   SFTP_USER: ${{ secrets.FTP_USERNAME }}
   SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
   
-on: push
+on: 
+  push:
+    branches:
+      - main
+
 name: "🚀 Deploy to production"
 jobs:
   deploy:
