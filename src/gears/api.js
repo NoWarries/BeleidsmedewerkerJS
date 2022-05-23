@@ -8,11 +8,13 @@ app.listen(port, () => {
     console.log(`[ 🔧 ] API listening to port : ${port}`);
 });
 
-app.get("/", (req, res) => {
-    res.send("root");
+app.get("/v1/xptable", (req, res) => {
+    db.getLevelTable().then(dataTable => { 
+        res.json(dataTable);
+    });
 });
 
-app.get("/user/:userID", (req, res) => {
+app.get("/v1/user/:userID", (req, res) => {
     db.getUser(req.params.userID).then(data => {
         db.getLevelTable().then(dataTable => { 
 
