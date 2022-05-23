@@ -19,13 +19,14 @@ try {
                     eventFile.execute(...args);
                 });
         }
-    });
+    })();
 } catch (err) {
     console.log(`[❌] Something went terrible : ${err.message}`);
 }
 
 // Load in gears
 const gears = fs.readdirSync("./src/gears").filter((file) => file.endsWith(".js"));
+
 for (let gear of gears) {
     import(`./gears/${gear}`);
 }
