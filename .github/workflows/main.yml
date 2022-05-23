@@ -20,7 +20,7 @@ jobs:
     - name: "📦 Getting dependencies (1/2)"
       run: npm install dotenv
     - name: "📦 Getting dependencies (2/2)"
-      run: npm install sftp-upload
+      run: npm install ssh2-sftp-client
     - name: "📁 Sending project files to production"
       run: npm run deploy
       

@@ -26,6 +26,6 @@
     "eslint": "^8.16.0",
     "nodemon": "^2.0.16",
     "prisma": "^3.14.0",
-    "sftp-upload": "^1.0.4"
+    "ssh2-sftp-client": "^8.1.0"
   }
 }
