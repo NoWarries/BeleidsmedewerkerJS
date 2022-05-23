@@ -12,7 +12,7 @@ import SFTPClient from "ssh2-sftp-client";
 // Folders to upload
 const folders = ["src", "prisma"];
 // Files to upload
-const files = ["index.js", "package.json", ".eslintrc.json"];
+const files = ["index.js", "package.json"];
 
 // Configuration connection (SFTP)
 const config = {
