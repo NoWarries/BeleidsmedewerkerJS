@@ -64,6 +64,13 @@ async function getTable(table, id) {
 }
 
 /**
+ * Get [level = xp] table respectively
+ */
+async function getLevelTable() {
+    return await prisma.levels.findMany();
+}
+
+/**
  * Get user object from given id
  * @param {string} id 
  */
@@ -80,4 +87,4 @@ async function getUser(id) {
 }
 
 
-export { getTable, getUser, incrementMessage };
+export { getTable, getUser, incrementMessage, getLevelTable };
