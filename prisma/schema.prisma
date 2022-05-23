@@ -11,14 +11,14 @@ datasource db {
 
 // Server configuration
 model Server {
-  id BigInt @id @unique
+  id String @id @unique
 
   loggingChannel Int @unique 
 }
 
 
 model User {
-  id BigInt @id @unique
+  id String @id @unique
   firstSeen DateTime @default(now())
 
   perms Int @default(1)
@@ -30,7 +30,7 @@ model User {
 }
 
 model Activity {
-  id BigInt @id @unique // relation scalar field 
+  id String @id @unique // relation scalar field 
   
   updatedAt DateTime @updatedAt
   messages Int @default(0)
@@ -40,7 +40,7 @@ model Activity {
 }
 
 model Progress {
-  id BigInt @id @unique // relation scalar field 
+  id String @id @unique // relation scalar field 
   
   level Int @default(1)
   xp Int @default(0)

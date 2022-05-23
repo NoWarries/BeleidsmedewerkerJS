@@ -6,14 +6,14 @@ const prisma = new PrismaClient();
  *
  * (Child function is only called upon by parents (CRUD))
  *
- * @param {(string|number)} id 
+ * @param {string} id 
  */
 async function ensureRecord(id) {
     return await prisma.user.upsert({
-        where: { id: parseInt(id) || 0 },
+        where: { id: id || 0 },
         update: {},
         create: {
-            id: parseInt(id),
+            id: id,
             activity: {
                 create: {}
             },
@@ -26,7 +26,7 @@ async function ensureRecord(id) {
 
 /**
  * Adds 1 message to the users activity
- * @param {(string|number)} id 
+ * @param {string} id 
  */
 async function incrementMessage(id) {
     /* Example usage :
@@ -37,10 +37,10 @@ async function incrementMessage(id) {
         });
 
     */
-    await ensureRecord(parseInt(id));
+    await ensureRecord(id);
     return await prisma.activity.update({
         where: {
-            id: parseInt(id),
+            id: id,
         },
         data : {
             messages: {
@@ -53,24 +53,31 @@ async function incrementMessage(id) {
 /**
  * Get specified table data
  * @param {String} table 
- * @param {(string|number)} id 
+ * @param {string} id 
  */
 async function getTable(table, id) {
     return await prisma[table].findUnique({
         where: {
-            id: parseInt(id),
+            id: id,
         },
     });
 }
 
 /**
+ * Get [level = xp] table respectively
+ */
+async function getLevelTable() {
+    return await prisma.levels.findMany();
+}
+
+/**
  * Get user object from given id
- * @param {(string|number)} id 
+ * @param {string} id 
  */
 async function getUser(id) {
     return await prisma.user.findUnique({
         where: {
-            id: parseInt(id),
+            id: id,
         },
         include: {
             activity: true,
@@ -80,5 +87,4 @@ async function getUser(id) {
 }
 
 
-
-export { getTable, getUser, incrementMessage };
+export { getTable, getUser, incrementMessage, getLevelTable };
