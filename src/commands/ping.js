@@ -14,7 +14,6 @@ async function execute(interaction) {
     const { client } = await import("../main.js");
     
     const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-    console.log(duration);
     const originalEmbed = new MessageEmbed()
         .setTimestamp()
         .setTitle(`${config.info.shorthand} - Ping`)
