@@ -24,7 +24,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16'
-    - name: "📦 Getting dependencies (1/3)"
+    - name: "📦 Getting dependencies (1/2)"
       run: npm install dotenv
     - name: "📦 Getting dependencies (2/2)"
       run: npm install @discordjs/rest 
