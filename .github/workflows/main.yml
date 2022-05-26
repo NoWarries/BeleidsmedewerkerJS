@@ -15,7 +15,7 @@ name: "🚀 Deploy to production"
 jobs:
 
   build:
-    name: "⚒️ Register commands at discord"
+    name: "✍️ Register commands at discord"
     runs-on: ubuntu-latest
     steps:
     - name: "⌛ Checking out the code"
