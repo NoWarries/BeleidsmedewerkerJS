@@ -87,4 +87,4 @@ async function getUser(id) {
 }
 
 
-export { getTable, getUser, incrementMessage, getLevelTable };
+export { getTable, getUser, incrementMessage, getLevelTable, ensureRecord };

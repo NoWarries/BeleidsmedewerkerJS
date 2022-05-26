@@ -27,9 +27,14 @@ async function execute(interaction) {
         .addField("⏱️ Ping data", "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms")
         .addField("👁️‍🗨️ Uptime", duration);
 
+<<<<<<< Updated upstream
     let fulfilledEmbed = await interaction.channel.send({ embeds: [originalEmbed] });
     fulfilledEmbed.edit({ embeds: [newEmbed] });
 
+=======
+    let fulfilledEmbed = await interaction.reply({ embeds: [originalEmbed] });
+    await fulfilledEmbed.editReply({ embeds: [newEmbed] });
+>>>>>>> Stashed changes
 }
 
 

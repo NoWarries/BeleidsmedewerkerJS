@@ -6,10 +6,11 @@ import fs from "fs";
 const commands = [];
 const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(".js"));
 (async () => {
+    console.log(commandFiles);
     for (const file of commandFiles) {
-        const command = await import(`./src/commands/${file}`);
+        const { data } = await import(`./src/commands/${file}`);
         console.log(`[ ✍️  ] Registering : ${file}`);
-        commands.push(command.data.toJSON());
+        commands.push(data.toJSON());
     }
 })().then( () => {
     // eslint-disable-next-line no-undef

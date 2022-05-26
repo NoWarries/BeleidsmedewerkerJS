@@ -14,6 +14,13 @@ var info = {
 
 };
 
+var api = {
+    
+    // api port to run on
+    "port": 28883,
+
+};
+
 var colors = {
     /*
     Main colors to use in embed
@@ -23,6 +30,7 @@ var colors = {
 
 export {
     colors,
-    info
+    info,
+    api
 };
 
