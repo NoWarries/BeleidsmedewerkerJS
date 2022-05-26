@@ -9,6 +9,7 @@ const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsW
     console.log(commandFiles);
     for (const file of commandFiles) {
         const { data } = await import(`./src/commands/${file}`);
+        console.log(data);
         console.log(`[ ✍️  ] Registering : ${file}`);
         commands.push(data.toJSON());
     }
