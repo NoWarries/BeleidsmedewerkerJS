@@ -3,6 +3,7 @@ import moment from "moment";
 import "moment-duration-format";
 import { MessageEmbed } from "discord.js";
 import { client } from "../main.js";
+import * as config from "../../config/common.js";
 
 let data = new SlashCommandBuilder()
     .setName("ping")
@@ -13,15 +14,15 @@ async function execute(interaction) {
 
     const originalEmbed = new MessageEmbed()
         .setTimestamp()
-        .setTitle("VHG - Ping")
-        .setColor("#ff6961")
+        .setTitle(`${config.info.shorthand} - Ping`)
+        .setColor(config.colors.clrMain)
         .setThumbnail(interaction.guild.iconURL())
         .setDescription("Pinging...");
 
     const newEmbed = new MessageEmbed()
         .setTimestamp()
-        .setTitle("VHG - Ping")
-        .setColor("#ff6961")
+        .setTitle(`${config.info.shorthand} - Ping`)
+        .setColor(config.colors.clrMain)
         .setThumbnail(interaction.guild.iconURL())
         .addField("⏱️ Ping data", "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms")
         .addField("👁️‍🗨️ Uptime", duration);
