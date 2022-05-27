@@ -15,6 +15,9 @@ let data = new SlashCommandBuilder()
 
 async function execute(interaction) {
     const { ensureRecord } = await import("../handler/database.js");
+    const { client } = await import("../main.js");
+
+
     const user = interaction.options.getUser("user") || interaction.user;
     const userID = user.id;
 
@@ -22,15 +25,25 @@ async function execute(interaction) {
     
     fetch("http://"+ip.address()+":"+config.api.port+"/v1/user/"+userID).then(res => res.json()).then(data => { 
 
-        console.log(user);
+        const guild = client.guilds.cache.get(config.info.id);
         const originalEmbed = new MessageEmbed()
             .setTimestamp()
             .setTitle(`${config.info.shorthand} - ${user.username}`)
             .setColor(config.colors.clrMain)
             .setThumbnail(user.avatarURL())
+        
+            .addField("Gebruikersnaam", `${user.username}#${user.discriminator}`, true)
+            .addField("Naam", guild.members.cache.get(userID).nickname, true)
+            .addField("ID", user.id, true)
+
+            .addField("Level", `${data.progress.level}`, true)
+            .addField("Experience", `(${data.progress.xp})`, true)
+            .addField("Needed", `${data.progress.togo}`, true)
+
+
             .addField("Messages :", data.activity.messages.toString(), true)
             .addField("Minutes  :", data.activity.minutes.toString(), true);
-        
+
         interaction.reply({ embeds: [originalEmbed] });
     });
 }
