@@ -1,6 +1,7 @@
 import * as config from "../../config/common.js";
 import { client } from "../main.js";
 import * as db from "../handler/database.js";
+import { assignXP } from "../handler/xpBottle.js";
 
 setInterval(async()=>{
     
@@ -11,6 +12,7 @@ setInterval(async()=>{
         console.log(`[ 🎤 ] ${member.nickname} found in voice channel ${member.voice.channel.name}`);
         db.incrementMinute(member.id)
             .then(res => {
+                assignXP(member.id, [config.xp.minute.min, config.xp.minute.max]);
                 console.log(`[ 🎤 ] Minute added ! ${member.nickname} now has ${res.minutes} minutes in vc`);
             });
     });

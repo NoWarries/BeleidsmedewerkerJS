@@ -3,6 +3,7 @@ import * as infraction from "../handler/ironDome.js";
 import * as db from "../handler/database.js";
 import {  } from "discord.js";
 import { assignXP } from "../handler/xpBottle.js";
+import * as config from "../../config/common.js";
 
 
 const once = false;
@@ -36,7 +37,7 @@ async function execute(interaction)
     }
 
     // Database
-    assignXP(interaction.author.id, [1, 10]);
+    assignXP(interaction.author.id, [config.xp.message.min, config.xp.message.max]);
 
     db.incrementMessage(interaction.author.id)
         .then(res => {

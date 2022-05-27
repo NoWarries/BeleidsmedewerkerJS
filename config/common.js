@@ -23,6 +23,21 @@ var api = {
 
 };
 
+var xp = {
+    
+    // xp to give out on message
+    "message": {
+        "min" : 1,
+        "max" : 4
+    },
+    // xp to give out on minute in vc
+    "minute": {
+        "min" : 2,
+        "max" : 3
+    }
+
+};
+
 var colors = {
     /*
     Main colors to use in embed
@@ -33,6 +48,7 @@ var colors = {
 export {
     colors,
     info,
-    api
+    api,
+    xp
 };
 
