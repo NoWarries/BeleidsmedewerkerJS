@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import * as config from "../../config/common.js";
 import { MessageEmbed } from "discord.js";
-import ip from"ip";
+import ip from "ip";
 import fetch from "node-fetch";
 
 let data = new SlashCommandBuilder()

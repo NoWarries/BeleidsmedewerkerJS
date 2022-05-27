@@ -77,6 +77,32 @@ async function addXP(id, xp) {
     });
 }
 
+/**
+ * Increment x xp to the users progress
+ * @param {string} id 
+ * @param {number} xp
+ */
+async function addLevel(id) {
+    /* Example usage :
+
+    db.addLevel(interaction.author.id)
+        .then(res => {
+            console.log(res);
+        });
+
+    */
+    await ensureRecord(id);
+    return await prisma.progress.update({
+        where: {
+            id: id,
+        },
+        data : {
+            level: {
+                increment: 1,
+            }
+        }
+    });
+}
 
 /**
  * Adds 1 minute to the users activity
@@ -142,4 +168,4 @@ async function getUser(id) {
 }
 
 
-export { getTable, getUser, incrementMessage, getLevelTable, ensureRecord, incrementMinute, addXP };
+export { getTable, getUser, incrementMessage, getLevelTable, ensureRecord, incrementMinute, addXP, addLevel };
