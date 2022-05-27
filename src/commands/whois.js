@@ -3,7 +3,6 @@ import * as config from "../../config/common.js";
 import { MessageEmbed } from "discord.js";
 import ip from"ip";
 import fetch from "node-fetch";
-import { ensureRecord } from "../handler/database.js";
 
 let data = new SlashCommandBuilder()
     .setName("whois")
@@ -15,6 +14,7 @@ let data = new SlashCommandBuilder()
     );
 
 async function execute(interaction) {
+    const { ensureRecord } = await import("../handler/database.js");
     const user = interaction.options.getUser("user") || interaction.user;
     const userID = user.id;
 
