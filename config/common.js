@@ -10,8 +10,10 @@ var info = {
     // Name of the application/server
     "name": "Beleidsmederwerker",
     // Shorthand to display
-    "shorthand": "VHG"
-
+    "shorthand": "VHG",
+    // Guild ID
+    "id": "561636178181357572"
+    
 };
 
 var api = {
