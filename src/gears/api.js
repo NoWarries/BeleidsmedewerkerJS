@@ -1,8 +1,9 @@
 import express from "express";
 import * as db from "../handler/database.js";
+import * as config from "../../config/common.js";
 
 const app = express();
-const port = 28883;
+const port = config.api.port;
 
 app.listen(port, () => {
     console.log(`[ 🔧 ] API listening to port : ${port}`);

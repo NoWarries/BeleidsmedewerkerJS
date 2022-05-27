@@ -12,7 +12,6 @@ let data = new SlashCommandBuilder()
 
 async function execute(interaction) {
     const { client } = await import("../main.js");
-    
     const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     const originalEmbed = new MessageEmbed()
         .setTimestamp()

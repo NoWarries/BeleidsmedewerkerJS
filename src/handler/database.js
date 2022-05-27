@@ -51,6 +51,33 @@ async function incrementMessage(id) {
 }
 
 /**
+ * Adds 1 minute to the users activity
+ * @param {string} id 
+ */
+async function incrementMinute(id) {
+    /* Example usage :
+
+    db.incrementMinute(interaction.author.id)
+        .then(res => {
+            console.log(res);
+        });
+
+    */
+    await ensureRecord(id);
+    return await prisma.activity.update({
+        where: {
+            id: id,
+        },
+        data : {
+            minutes: {
+                increment: 1,
+            }
+        }
+    });
+}
+
+
+/**
  * Get specified table data
  * @param {String} table 
  * @param {string} id 
@@ -87,4 +114,4 @@ async function getUser(id) {
 }
 
 
-export { getTable, getUser, incrementMessage, getLevelTable };
+export { getTable, getUser, incrementMessage, getLevelTable, ensureRecord, incrementMinute };
