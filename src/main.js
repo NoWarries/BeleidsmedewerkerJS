@@ -2,7 +2,15 @@ import "dotenv/config";
 import { Client, Intents, Collection } from "discord.js";
 import fs from "fs";
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client(
+    { intents: 
+        [
+            Intents.FLAGS.GUILDS, 
+            Intents.FLAGS.GUILD_MEMBERS,
+            Intents.FLAGS.GUILD_MESSAGES,
+            Intents.FLAGS.GUILD_VOICE_STATES
+        ] 
+    });
 
 /**
  * Event handler
@@ -12,7 +20,7 @@ const events = fs.readdirSync("./src/events").filter((file) => file.endsWith(".j
 try {
     (async () => {
         for (let event of events) {
-            console.log(event);
+            console.log(`[ 🎫 ] Preparing ${event}`);
             const eventFile = await import(`./events/${event}`);
             if (eventFile.once)
                 client.once(eventFile.name, (...args) => {
@@ -23,6 +31,8 @@ try {
                     eventFile.execute(...args);
                 });
         }
+        console.log(`[ 🎫 ] ${events.length} Event(s) loaded sucsesfully`);
+        console.table(events);
     })();
 } catch (err) {
     console.log(`[❌] Something went terrible : ${err.message}`);
@@ -34,8 +44,11 @@ try {
  */
 const gears = fs.readdirSync("./src/gears").filter((file) => file.endsWith(".js"));
 for (let gear of gears) {
+    console.log(`[ ⚙️ ] Preparing ${gear}`);
     import(`./gears/${gear}`);
 }
+console.log(`[ ⚙️ ] ${gears.length} Gear(s) loaded sucsesfully`);
+console.table(gears);
 
 /**
  * Command handler
@@ -45,11 +58,12 @@ client.commands = new Collection();
 const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 (async () => {
     for (const file of commandFiles) {
-        console.log(file);
+        console.log(`[ 🤖 ] Preparing ${file}`);
         const command = await import(`./commands/${file}`);
-        console.log(command);
         client.commands.set(command.data.name, command);
     }
+    console.log(`[ 🤖 ] ${commandFiles.length} Command(s) loaded sucsesfully`);
+    console.table(commandFiles);
 })();
 client.on("interactionCreate", async interaction => {
     if (!interaction.isCommand()) return;
