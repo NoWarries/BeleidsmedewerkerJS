@@ -2,6 +2,7 @@ import stopPhishing from "stop-discord-phishing";
 import * as infraction from "../handler/ironDome.js";
 import * as db from "../handler/database.js";
 import {  } from "discord.js";
+import { assignXP } from "../handler/xpBottle.js";
 
 
 const once = false;
@@ -35,6 +36,8 @@ async function execute(interaction)
     }
 
     // Database
+    assignXP(interaction.author.id, [1, 10]);
+
     db.incrementMessage(interaction.author.id)
         .then(res => {
             console.log(res);
