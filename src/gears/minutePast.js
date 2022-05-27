@@ -11,7 +11,7 @@ setInterval(async()=>{
         console.log(`[ 🎤 ] ${member.nickname} found in voice channel ${member.voice.channel.name}`);
         db.incrementMinute(member.id)
             .then(res => {
-                console.log(`[ 🎤 ] Minute added to ${member.nickname} now has ${res.minutes}`);
+                console.log(`[ 🎤 ] Minute added ! ${member.nickname} now has ${res.minutes} minutes in vc`);
             });
     });
 
