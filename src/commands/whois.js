@@ -29,7 +29,7 @@ async function execute(interaction) {
             .setColor(config.colors.clrMain)
             .setThumbnail(user.avatarURL())
             .addField("Messages :", data.activity.messages.toString(), true)
-            .addField("Minutes (WIP) :", data.activity.minutes.toString(), true);
+            .addField("Minutes  :", data.activity.minutes.toString(), true);
         
         interaction.reply({ embeds: [originalEmbed] });
     });
