@@ -5,7 +5,7 @@ import { assignXP } from "../handler/xpBottle.js";
 
 setInterval(async()=>{
     
-    const guild = await client.guilds.fetch(config.info.id);
+    const guild = await client.guilds.fetch(config.guild.id);
     const members = guild.members.cache.filter(m => m.voice.channelId != null && m.bot != true);
 
     members.forEach(member => {

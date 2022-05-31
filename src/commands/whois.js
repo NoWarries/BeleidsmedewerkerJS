@@ -43,11 +43,11 @@ async function execute(interaction) {
                 }
             }
 
-            const guild = client.guilds.cache.get(config.info.id);
+            const guild = client.guilds.cache.get(config.guild.id);
             const originalEmbed = new MessageEmbed()
                 .setTimestamp()
-                .setTitle(`${config.info.shorthand} - ${user.username}`)
-                .setColor(config.colors.clrMain)
+                .setTitle(`${config.guild.shorthand} - ${user.username}`)
+                .setColor(config.colors.default)
                 .setThumbnail(user.avatarURL())
 
                 .addField("Gebruikersnaam", `${user.username}#${user.discriminator}`, true)

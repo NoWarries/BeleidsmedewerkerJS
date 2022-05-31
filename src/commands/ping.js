@@ -15,15 +15,15 @@ async function execute(interaction) {
     const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
     const originalEmbed = new MessageEmbed()
         .setTimestamp()
-        .setTitle(`${config.info.shorthand} - Ping`)
-        .setColor(config.colors.clrMain)
+        .setTitle(`${config.guild.shorthand} - Ping`)
+        .setColor(config.colors.default)
         .setThumbnail(interaction.guild.iconURL())
         .setDescription("Pinging...");
 
     const newEmbed = new MessageEmbed()
         .setTimestamp()
-        .setTitle(`${config.info.shorthand} - Ping`)
-        .setColor(config.colors.clrMain)
+        .setTitle(`${config.guild.shorthand} - Ping`)
+        .setColor(config.colors.default)
         .setThumbnail(interaction.guild.iconURL())
         .addField("⏱️ Ping data", "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms")
         .addField("👁️‍🗨️ Uptime", duration);
