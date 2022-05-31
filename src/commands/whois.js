@@ -19,31 +19,30 @@ async function execute(interaction) {
     const userID = user.id;
 
     await ensureRecord(userID);
-    
-    fetch(`${config.api.endpoint}/user/${userID}`)
-        .then(res => res.json()).then(data => {
+        fetch(`${config.api.endpoint}/user/${userID}`)
+            .then(res => res.json()).then(data => {
+            console.log(data)
+            const guild = client.guilds.cache.get(config.info.id);
+            const originalEmbed = new MessageEmbed()
+                .setTimestamp()
+                .setTitle(`${config.info.shorthand} - ${user.username}`)
+                .setColor(config.colors.clrMain)
+                .setThumbnail(user.avatarURL())
 
-        const guild = client.guilds.cache.get(config.info.id);
-        const originalEmbed = new MessageEmbed()
-            .setTimestamp()
-            .setTitle(`${config.info.shorthand} - ${user.username}`)
-            .setColor(config.colors.clrMain)
-            .setThumbnail(user.avatarURL())
+                .addField("Gebruikersnaam", `${user.username}#${user.discriminator}`, true)
+                .addField("Naam", guild.members.cache.get(userID).nickname, true)
+                .addField("ID", user.id, true)
 
-            .addField("Gebruikersnaam", `${user.username}#${user.discriminator}`, true)
-            .addField("Naam", guild.members.cache.get(userID).nickname, true)
-            .addField("ID", user.id, true)
-
-            .addField("Level", `${data.progress.level}`, true)
-            .addField("Experience", `(${data.progress.xp})`, true)
-            .addField("Needed", `${data.progress.togo}`, true)
+                .addField("Level", `${data.progress.level}`, true)
+                .addField("Experience", `(${data.progress.xp})`, true)
+                .addField("Needed", `${data.progress.togo}`, true)
 
 
-            .addField("Messages :", data.activity.messages.toString(), true)
-            .addField("Minutes  :", data.activity.minutes.toString(), true);
+                .addField("Messages :", data.activity.messages.toString(), true)
+                .addField("Minutes  :", data.activity.minutes.toString(), true);
 
-        interaction.reply({ embeds: [originalEmbed] });
-    });
+            interaction.reply({embeds: [originalEmbed]});
+        });
 }
 
 export { data, execute };
