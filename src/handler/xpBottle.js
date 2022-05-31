@@ -23,7 +23,7 @@ function determineXP(min, max) {
 function assignXP(id, [min, max]) {
     const xp = determineXP(min, max);
     addXP(id, xp).then(() => {
-        fetch("http://"+ip.address()+":"+config.api.port+"/v1/user/"+id).then(res => res.json()).then(data => { 
+        fetch(`${config.api.endpoint}/user/${id}`).then(res => res.json()).then(data => {
             
             // if xp required has been reached
             if(data.progress.togo <= 0) {

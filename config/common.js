@@ -1,3 +1,5 @@
+import ip from "ip";
+
 /** Common configuration file
  *  Should always be aproached as `config
  *
@@ -16,12 +18,14 @@ var info = {
     
 };
 
-var api = {
-    
-    // api port to run on
-    "port": 28883,
-
-};
+class Api {
+    constructor(port) {
+        this.url = `http://${ip.address()}`,
+        this.port =  port,
+        this.endpoint = `${this.url}:${this.port}/v1`
+    }
+}
+const api = new Api(28883);
 
 var xp = {
     
