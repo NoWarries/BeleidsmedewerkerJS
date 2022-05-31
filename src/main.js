@@ -39,13 +39,13 @@ try {
 }
 
 /**
- * Load in gears
+ * Load in cogs
  * Import / Execute on javascript execution
  */
-const gears = fs.readdirSync("./src/gears").filter((file) => file.endsWith(".js"));
+const gears = fs.readdirSync("./src/cogs").filter((file) => file.endsWith(".js"));
 for (let gear of gears) {
     console.log(`[ ⚙️ ] Preparing ${gear}`);
-    import(`./gears/${gear}`);
+    import(`./cogs/${gear}`);
 }
 console.log(`[ ⚙️ ] ${gears.length} Gear(s) loaded sucsesfully`);
 console.table(gears);
