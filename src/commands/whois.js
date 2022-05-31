@@ -21,7 +21,28 @@ async function execute(interaction) {
     await ensureRecord(userID);
         fetch(`${config.api.endpoint}/user/${userID}`)
             .then(res => res.json()).then(data => {
-            console.log(data)
+
+            /*
+            Given is that data.progress.relative.togo is the amount of xp togo for the next level
+            Given is that data.progress.relative.earned is the amount of xp earned for the current level
+            Given is that data.progress.relative.needed is the amount of xp needed for the relative level
+
+            Calculate the percentage past for this level
+             */
+            const percentage = (data.progress.relative.earned / data.progress.relative.needed) * 100;
+            // Round percentage to 2 decimal places
+            const percentageShort = Math.round(percentage * 100) / 100
+
+            let bar = "";
+            // Create a bar of 10 characters
+            for (let i = 1; i <= 10; i++) {
+                if (i < percentageShort / 10) {
+                    bar += "🟥";
+                } else {
+                    bar += "⬜";
+                }
+            }
+
             const guild = client.guilds.cache.get(config.info.id);
             const originalEmbed = new MessageEmbed()
                 .setTimestamp()
@@ -33,10 +54,13 @@ async function execute(interaction) {
                 .addField("Naam", guild.members.cache.get(userID).nickname, true)
                 .addField("ID", user.id, true)
 
-                .addField("Level", `${data.progress.level}`, true)
-                .addField("Experience", `(${data.progress.xp})`, true)
-                .addField("Needed", `${data.progress.togo}`, true)
+                .addField(`\u200B \n ${bar}  ${percentageShort} %`, "\u200B")
 
+                .addField("Level", `${data.progress.level}`, true)
+                .addField("Experience", `(${data.progress.relative.earned}/${data.progress.relative.needed})`, true)
+                .addField("Needed", `${data.progress.relative.togo}`, true)
+
+                .addField("\u200B", "\u200B")
 
                 .addField("Messages :", data.activity.messages.toString(), true)
                 .addField("Minutes  :", data.activity.minutes.toString(), true);
