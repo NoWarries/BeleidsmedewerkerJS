@@ -14,7 +14,7 @@ const client = new Client(
 
 /**
  * Event handler
- * Handles loading in event and listening to their occurences 
+ * Handles loading in event and listening to their occurrences
  */
 const events = fs.readdirSync("./src/events").filter((file) => file.endsWith(".js"));
 try {
@@ -31,7 +31,7 @@ try {
                     eventFile.execute(...args);
                 });
         }
-        console.log(`[ 🎫 ] ${events.length} Event(s) loaded sucsesfully`);
+        console.log(`[ 🎫 ] ${events.length} Event(s) loaded successfully`);
         console.table(events);
     })();
 } catch (err) {
@@ -47,7 +47,7 @@ for (let gear of gears) {
     console.log(`[ ⚙️ ] Preparing ${gear}`);
     import(`./cogs/${gear}`);
 }
-console.log(`[ ⚙️ ] ${gears.length} Gear(s) loaded sucsesfully`);
+console.log(`[ ⚙️ ] ${gears.length} Gear(s) loaded successfully`);
 console.table(gears);
 
 /**
@@ -62,7 +62,7 @@ const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWi
         const command = await import(`./commands/${file}`);
         client.commands.set(command.data.name, command);
     }
-    console.log(`[ 🤖 ] ${commandFiles.length} Command(s) loaded sucsesfully`);
+    console.log(`[ 🤖 ] ${commandFiles.length} Command(s) loaded successfully`);
     console.table(commandFiles);
 })();
 client.on("interactionCreate", async interaction => {
