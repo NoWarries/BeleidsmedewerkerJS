@@ -1,10 +1,23 @@
 #  BeleidsmedewerkerJS
-![GitHub repo size](https://img.shields.io/github/repo-size/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
+![https://github.com/NoWarries/BeleidsmedewerkerJS](https://img.shields.io/github/repo-size/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
+![https://github.com/NoWarries/BeleidsmedewerkerJS/blob/master/LICENSE.md](https://img.shields.io/github/license/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
 
-DiscordJS bot made for single server use
+Yet another discord bot. Made specifically for single server use.
+
+with DiscordJS v13 and slash commands implemented
+
 > Keep in mind this code is not made with the intention to be scalable or easily implementable.
 > But **sharing is caring ❤** ️
+
+
+---
+
+## Bot status
+Status of the original bot this code is written for
+
+![https://github.com/NoWarries/BeleidsmedewerkerJS](https://img.shields.io/uptimerobot/status/m791920242-284fcba336d9972fc3fd9767?style=flat-square)
+![https://github.com/NoWarries/BeleidsmedewerkerJS](https://img.shields.io/uptimerobot/ratio/7/m791920242-284fcba336d9972fc3fd9767?style=flat-square)
+---
 
 ## Architecture
 Elaborates on several parts of the BeleidsmedewerkerJS architecture
@@ -38,7 +51,7 @@ Including but not limited to : events, handlers and triggers
      * It initialises and sets up the client||shard
      * And handles all the logic
      */
-    /main.js
+    /main.js/
         
     /**
      * Cogs (gears) are execute on run scripts.

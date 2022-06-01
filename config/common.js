@@ -7,10 +7,14 @@ import ip from "ip";
  *  import * as config from "../../config/common.js";
  */
 
+var bot = {
+    "name": "Beleidsmederwerker",
+}
+
 var guild = {
 
-    // Name of the application/server
-    "name": "Beleidsmederwerker",
+    // Name of the guild
+    "name": "Verenigd Havistisch Genootschap",
     // Shorthand to display
     "shorthand": "VHG",
     // Guild ID
