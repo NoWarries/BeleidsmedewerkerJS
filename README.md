@@ -1,5 +1,10 @@
 #  BeleidsmedewerkerJS
-Currently, intended/build for single server use.
+![GitHub repo size](https://img.shields.io/github/repo-size/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
+
+DiscordJS bot made for single server use
+> Keep in mind this code is not made with the intention to be scalable or easily implementable.
+> But **sharing is caring ❤** ️
 
 ## Architecture
 Elaborates on several parts of the BeleidsmedewerkerJS architecture

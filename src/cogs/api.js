@@ -20,11 +20,19 @@ app.listen(port, () => {
     console.log(`[ 🔧 ] API listening to port : ${port}`);
 });
 
-// Prevent favicon.ico from throwing
-app.get('/favicon.ico', function(req, res) {
-    res.status(204);
-    res.end();
-});
+// status endpoint to check status of api
+app.get("/v1/status", async (req, res) => {
+    try {
+        const {client} = await import("../main.js");
+        if (client.uptime > 0) {
+        res.sendStatus(202);
+        } else {
+        res.sendStatus(500);
+        }
+    } catch (e) {
+        res.sendStatus(503);
+    }
+})
 
 app.get("/v1/xptable", (req, res) => {
     db.getLevelTable().then(dataTable => { 
