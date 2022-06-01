@@ -1,6 +1,6 @@
 #  BeleidsmedewerkerJS
-![https://github.com/NoWarries/BeleidsmedewerkerJS](https://img.shields.io/github/repo-size/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
-![https://github.com/NoWarries/BeleidsmedewerkerJS/blob/master/LICENSE.md](https://img.shields.io/github/license/noWarries/BeleidsmedewerkerJS?style=for-the-badge)
+![https://github.com/NoWarries/BeleidsmedewerkerJS](https://img.shields.io/github/repo-size/noWarries/BeleidsmedewerkerJS?style=flat-square)
+![https://github.com/NoWarries/BeleidsmedewerkerJS/blob/master/LICENSE.md](https://img.shields.io/github/license/noWarries/BeleidsmedewerkerJS?style=flat-square)
 
 Yet another discord bot. Made specifically for single server use.
 
