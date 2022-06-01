@@ -24,6 +24,8 @@ var guild = {
 
         // ID of general notifcation channel
         "general": "561916667236581377",
+        // ID of testing channel
+        "testing": "833380699314454558",
         // ID of the channel where the bot will post the level up message
         "levelup": "561916667236581377",
         // ID of the channel where the bot will post welcome messages
@@ -65,7 +67,10 @@ var colors = {
     */
 
     // Default color of the bot
-    "default": "#ff6961"
+    "default": "#ff6961",
+    // Color for level up message
+    "levelup": "#9fff7a"
+
 };
 
 export {

@@ -1,7 +1,7 @@
 import * as config from "../../config/common.js";
 import { client } from "../main.js";
-import * as db from "../handler/database.js";
-import { assignXP } from "../handler/xpBottle.js";
+import * as db from "../handlers/database.js";
+import { assignXP } from "../handlers/xpBottle.js";
 
 setInterval(async()=>{
     

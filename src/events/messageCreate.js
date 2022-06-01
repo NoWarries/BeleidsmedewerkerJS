@@ -1,9 +1,10 @@
 import stopPhishing from "stop-discord-phishing";
-import * as infraction from "../handler/ironDome.js";
-import * as db from "../handler/database.js";
+import * as infraction from "../handlers/ironDome.js";
+import * as db from "../handlers/database.js";
 import {  } from "discord.js";
-import { assignXP } from "../handler/xpBottle.js";
+import { assignXP } from "../handlers/xpBottle.js";
 import * as config from "../../config/common.js";
+import {announceLevelUp} from "../handlers/communicator.js";
 
 
 const once = false;
@@ -35,6 +36,7 @@ async function execute(interaction)
 
         return; // Exit out of execution ( No further steps required)
     }
+
 
     // Database
     assignXP(interaction.author.id, [config.xp.message.min, config.xp.message.max]);

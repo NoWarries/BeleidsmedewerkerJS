@@ -13,7 +13,7 @@ const client = new Client(
     });
 
 /**
- * Event handler
+ * Event handlers
  * Handles loading in event and listening to their occurrences
  */
 const events = fs.readdirSync("./src/events").filter((file) => file.endsWith(".js"));
@@ -51,7 +51,7 @@ console.log(`[ ⚙️ ] ${gears.length} Gear(s) loaded successfully`);
 console.table(gears);
 
 /**
- * Command handler
+ * Command handlers
  * Loads in commands
  */
 client.commands = new Collection();

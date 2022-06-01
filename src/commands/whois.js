@@ -13,7 +13,7 @@ let data = new SlashCommandBuilder()
     );
 
 async function execute(interaction) {
-    const { ensureRecord } = await import("../handler/database.js");
+    const { ensureRecord } = await import("../handlers/database.js");
     const { client } = await import("../main.js");
     const user = interaction.options.getUser("user") || interaction.user;
     const userID = user.id;

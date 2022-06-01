@@ -2,6 +2,7 @@ import { addLevel, addXP } from "./database.js";
 import ip from "ip";
 import * as config from "../../config/common.js";
 import fetch from "node-fetch";
+import {announceLevelUp} from "./communicator.js";
 
 /**
  * Generates a random number with a min and max value
@@ -26,9 +27,11 @@ function assignXP(id, [min, max]) {
         fetch(`${config.api.endpoint}/user/${id}`).then(res => res.json()).then(data => {
             
             // if xp required has been reached
-            if(data.progress.togo <= 0) {
+            if(data.progress.relative.togo <= 0) {
                 // add level
-                addLevel(id);
+                announceLevelUp(id, config.guild.channels.levelup, config.guild.id, data.progress.level+1).then(() =>
+                    addLevel(id)
+                );
             }
 
         });
