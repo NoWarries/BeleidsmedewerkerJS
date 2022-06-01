@@ -13,9 +13,7 @@
     "prisma:generate": "npx prisma generate",
     "prisma:studio": "npx prisma studio"
   },
-  "keywords": [],
-  "author": "Coen Warries",
-  "license": "ISC",
+  "license": "mpl-2.0",
   "dependencies": {
     "@discordjs/builders": "^0.13.0",
     "@discordjs/rest": "^0.4.1",
