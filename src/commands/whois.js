@@ -19,8 +19,8 @@ async function execute(interaction) {
     const userID = user.id;
 
     await ensureRecord(userID);
-        fetch(`${config.api.endpoint}/user/${userID}`)
-            .then(res => res.json()).then(data => {
+    fetch(`${config.api.endpoint}/user/${userID}`)
+        .then(res => res.json()).then(data => {
 
             /*
             Given is that data.progress.relative.togo is the amount of xp togo for the next level
@@ -31,7 +31,7 @@ async function execute(interaction) {
              */
             const percentage = (data.progress.relative.earned / data.progress.relative.needed) * 100;
             // Round percentage to 2 decimal places
-            const percentageShort = Math.round(percentage * 100) / 100
+            const percentageShort = Math.round(percentage * 100) / 100;
 
             let bar = "";
             // Create a bar of 10 characters

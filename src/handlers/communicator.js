@@ -40,7 +40,7 @@ async function announceLevelUp(userID, channelID, guildID, level) {
         .setDescription(`Hoera! <@${interaction.user.id}> heeft een nieuw niveau bereikt`)
         .addField("\u200B", `Gefeliciteerd met het bereiken van niveau ${level} mogen er nog vele volgen 🙏`)
         .setThumbnail(interaction.user.avatarURL())
-        .setColor(config.colors.levelup)
+        .setColor(config.colors.levelup);
 
     interaction.channel.send({embeds: [embed]});
 }

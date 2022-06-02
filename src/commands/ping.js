@@ -28,7 +28,7 @@ async function execute(interaction) {
         .addField("⏱️ Ping data", "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms")
         .addField("👁️‍🗨️ Uptime", duration);
 
-    let fulfilledEmbed = await interaction.reply({ embeds: [originalEmbed] });
+    await interaction.reply({ embeds: [originalEmbed] });
     await interaction.editReply({ embeds: [newEmbed] });
 }
 
