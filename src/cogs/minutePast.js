@@ -1,11 +1,11 @@
 import * as config from "../../config/common.js";
 import { client } from "../main.js";
-import * as db from "../handler/database.js";
-import { assignXP } from "../handler/xpBottle.js";
+import * as db from "../handlers/database.js";
+import { assignXP } from "../handlers/xpBottle.js";
 
 setInterval(async()=>{
     
-    const guild = await client.guilds.fetch(config.info.id);
+    const guild = await client.guilds.fetch(config.guild.id);
     const members = guild.members.cache.filter(m => m.voice.channelId != null && m.bot != true);
 
     members.forEach(member => {
