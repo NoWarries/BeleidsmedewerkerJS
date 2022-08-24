@@ -31,7 +31,7 @@ async function execute(interaction)
     if(await phisingLinkTrue){
 
         infraction.deleteMesasge(interaction, "Phising link");
-        infraction.timeOut(interaction, 10, "Phising link");
+        infraction.timeOut(interaction, config.moderation.phisingLink, "Phising link");
 
         return; // Exit out of execution ( No further steps required)
     }
@@ -46,6 +46,7 @@ async function execute(interaction)
         });
 
     // Eval command for testing (will be moved later on)
+    // eslint-disable-next-line no-undef
     if ( interaction.author.id === process.env.OWNER_ID
         && interaction.content.startsWith("$eval```js")) {
 
@@ -58,20 +59,21 @@ async function execute(interaction)
             const embed = new MessageEmbed()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
-                .addField(":outbox_tray: output: ", `\`\`\`js\n${clean(evaled)}\n\`\`\``)
+                .addField(":outbox_tray: output: ", `\`\`\`js\n${clean(evaled)}\n\`\`\``);
 
-            interaction.channel.send({embeds: [embed]})
+            interaction.channel.send({embeds: [embed]});
         } catch (err) {
             const embed = new MessageEmbed()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
-                .addField(":outbox_tray: output: ", `\`\`\`${clean(err)}\`\`\``)
+                .addField(":outbox_tray: output: ", `\`\`\`${clean(err)}\`\`\``);
 
-            interaction.channel.send({embeds: [embed]})
+            interaction.channel.send({embeds: [embed]});
         }
+        // eslint-disable-next-line no-inner-declarations
         function clean(text) {
-            if (typeof(text) === 'string')
-                return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
+            if (typeof(text) === "string")
+                return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
             else
                 return text;
         }
