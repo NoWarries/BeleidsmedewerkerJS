@@ -25,14 +25,14 @@ app.get("/v1/status", async (req, res) => {
     try {
         const {client} = await import("../main.js");
         if (client.uptime > 0) {
-        res.sendStatus(202);
+            res.sendStatus(202);
         } else {
-        res.sendStatus(500);
+            res.sendStatus(500);
         }
     } catch (e) {
         res.sendStatus(503);
     }
-})
+});
 
 app.get("/v1/xptable", (req, res) => {
     db.getLevelTable().then(dataTable => { 
@@ -58,7 +58,7 @@ app.get("/v1/user/:userID", (req, res) => {
                 needed : dataTable[data.progress.level]["xp"] - dataTable[data.progress.level-1]["xp"] || 0,
                 // total xp needed for next level
                 total : dataTable[data.progress.level]["xp"] || 0,
-            }
+            };
 
 
             if (data != null) {
