@@ -24,8 +24,8 @@ async function execute(interaction) {
         .setTimestamp()
         .setTitle(`${config.guild.shorthand} - Ping`)
         .setColor(config.colors.default)
-        .setThumbnail(interaction.guild.iconURL())
-    newEmbed.addvalues(
+        .setThumbnail(interaction.guild.iconURL());
+    newEmbed.addFields(
         { 
             name: "⏱️ Ping data", 
             value: "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms",

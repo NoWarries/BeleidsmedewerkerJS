@@ -49,7 +49,7 @@ async function execute(interaction) {
                 .setTitle(`${config.guild.shorthand} - ${user.username}`)
                 .setColor(config.colors.default)
                 .setThumbnail(user.avatarURL())
-                .addvalues(                    
+                .addFields(                    
                     { 
                         name: "Gebruikersnaam", 
                         value: `${user.username}#${user.discriminator}`,
