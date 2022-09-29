@@ -49,22 +49,58 @@ async function execute(interaction) {
                 .setTitle(`${config.guild.shorthand} - ${user.username}`)
                 .setColor(config.colors.default)
                 .setThumbnail(user.avatarURL())
-
-                .addField("Gebruikersnaam", `${user.username}#${user.discriminator}`, true)
-                .addField("Naam", guild.members.cache.get(userID).nickname, true)
-                .addField("ID", user.id, true)
-
-                .addField(`\u200B \n ${bar}  ${percentageShort} %`, "\u200B")
-
-                .addField("Level", `${data.progress.level}`, true)
-                .addField("Experience", `(${data.progress.relative.earned}/${data.progress.relative.needed})`, true)
-                .addField("Needed", `${data.progress.relative.togo}`, true)
-
-                .addField("\u200B", "\u200B")
-
-                .addField("Messages :", data.activity.messages.toString(), true)
-                .addField("Minutes  :", data.activity.minutes.toString(), true);
-
+                .addvalues(                    
+                    { 
+                        name: "Gebruikersnaam", 
+                        value: `${user.username}#${user.discriminator}`,
+                        inline: true
+                    },
+                    { 
+                        name: "Naam", 
+                        value: guild.members.cache.get(userID).nickname,
+                        inline: true
+                    },
+                    { 
+                        name: "ID", 
+                        value: user.id,
+                        inline: true
+                    },
+                    { 
+                        name: `\u200B \n ${bar}  ${percentageShort} %`, 
+                        value: "\u200B",
+                        inline: false
+                    },
+                    { 
+                        name: "Level", 
+                        value: `${data.progress.level}`,
+                        inline: true
+                    },
+                    { 
+                        name: "Experience", 
+                        value: `(${data.progress.relative.earned}/${data.progress.relative.needed})`,
+                        inline: true
+                    },
+                    { 
+                        name: "Needed", 
+                        value: `${data.progress.relative.togo}`,
+                        inline: true
+                    },
+                    { 
+                        name: "\u200B", 
+                        value: "\u200B",
+                        inline: false
+                    },
+                    { 
+                        name: "Messages", 
+                        value: data.activity.messages.toString(),
+                        inline: true
+                    },
+                    { 
+                        name: "Minutes", 
+                        value: data.activity.minutes.toString(),
+                        inline: true
+                    }
+                );
             interaction.reply({embeds: [originalEmbed]});
         });
 }

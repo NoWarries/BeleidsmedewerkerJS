@@ -104,10 +104,16 @@ async function execute(interaction)
 
                 embed.setTitle("Stelling en Stemming [i]");
                 embed.setDescription("Een nieuwe stelling is geplaatst \n Gelieve te kiezen uit " + up + " (Upvote) en " + down + " (Downvote)");
-                embed.setFooter(interaction.guild.members.cache.get(interaction.author.id).nickname, user.avatarURL());
+                embed.setFooter({text: `${interaction.guild.members.cache.get(interaction.author.id).nickname}`, iconURL: user.avatarURL()});
                 embed.setTimestamp();
                 embed.setColor("RANDOM");
-                embed.addField("\u200B", "```" + interaction.content + "```");
+                embed.addFields(
+                    { 
+                        name: "\u200B", 
+                        value: "```" + interaction.content + "```",
+                        inline: false
+                    }
+                );
                 interaction.channel.send({ embeds: [embed] })
                     .then(message => message.react(up))
                     .then(res => res.message.react(down));

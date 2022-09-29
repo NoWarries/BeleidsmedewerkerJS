@@ -25,8 +25,19 @@ async function execute(interaction) {
         .setTitle(`${config.guild.shorthand} - Ping`)
         .setColor(config.colors.default)
         .setThumbnail(interaction.guild.iconURL())
-        .addField("⏱️ Ping data", "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms")
-        .addField("👁️‍🗨️ Uptime", duration);
+    newEmbed.addvalues(
+        { 
+            name: "⏱️ Ping data", 
+            value: "Time " + Math.round(Date.now() - interaction.createdTimestamp) + "ms \n Heartbeat: " + Math.round(client.ws.ping) + "ms",
+            inline: false
+        },
+        { 
+            name: "👁️‍🗨️ Uptime", 
+            value: duration,
+            inline: false
+        }
+    );
+    
 
     await interaction.reply({ embeds: [originalEmbed] });
     await interaction.editReply({ embeds: [newEmbed] });
