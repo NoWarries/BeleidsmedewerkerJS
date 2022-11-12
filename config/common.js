@@ -47,7 +47,7 @@ class Api {
         this.root = "/v1",
         this.url = `http://${ip.address()}`,
         this.port =  port,
-        this.endpoint = `${this.url}:${this.port}/v1`;
+        this.endpoint = `${this.url}:${this.port}${this.root}`;
     }
 }
 const api = new Api(28883);
