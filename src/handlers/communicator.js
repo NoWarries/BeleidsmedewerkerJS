@@ -1,5 +1,5 @@
 import * as config from "../../config/common.js";
-import {MessageEmbed} from "discord.js";
+import {EmbedBuilder} from "discord.js";
 const { client } = await import("../main.js");
 
 // Retrieve guild specific interaction data
@@ -35,7 +35,7 @@ async function announceLevelUp(userID, channelID, guildID, level) {
     const interaction = new Interaction(userID, channelID, guildID);
 
     // create embed
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
         .setTitle("Progressie geen depressie [!]")
         .setDescription(`Hoera! <@${interaction.user.id}> heeft een nieuw niveau bereikt`)
         .addField("\u200B", `Gefeliciteerd met het bereiken van niveau ${level} mogen er nog vele volgen 🙏`)

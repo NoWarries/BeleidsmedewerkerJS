@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import * as config from "../../config/common.js";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import fetch from "node-fetch";
 
 let data = new SlashCommandBuilder()
@@ -44,7 +44,7 @@ async function execute(interaction) {
             }
 
             const guild = client.guilds.cache.get(config.guild.id);
-            const originalEmbed = new MessageEmbed()
+            const originalEmbed = new EmbedBuilder()
                 .setTimestamp()
                 .setTitle(`${config.guild.shorthand} - ${user.username}`)
                 .setColor(config.colors.default)

@@ -1,7 +1,7 @@
 import stopPhishing from "stop-discord-phishing";
 import * as infraction from "../handlers/ironDome.js";
 import * as db from "../handlers/database.js";
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { assignXP } from "../handlers/xpBottle.js";
 import * as config from "../../config/common.js";
 import "dotenv/config";
@@ -60,14 +60,14 @@ async function execute(interaction)
 
         try {
             var evaled = eval(code);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
                 .addField(":outbox_tray: output: ", `\`\`\`js\n${clean(evaled)}\n\`\`\``);
 
             interaction.channel.send({embeds: [embed]});
         } catch (err) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
                 .addField(":outbox_tray: output: ", `\`\`\`${clean(err)}\`\`\``);
@@ -99,7 +99,7 @@ async function execute(interaction)
                 const up = "<:upvote:819303307033444363>";
                 const down = "<:downvote:819304367806087189>";
 
-                const embed = new MessageEmbed();
+                const embed = new EmbedBuilder();
                 const user = client.users.cache.get(interaction.author.id);
 
                 embed.setTitle("Stelling en Stemming [i]");

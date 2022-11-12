@@ -1,14 +1,14 @@
 import "dotenv/config";
-import { Client, Intents, Collection } from "discord.js";
+import { Client, GatewayIntentBits, Collection } from "discord.js";
 import fs from "fs";
 
 const client = new Client(
     { intents: 
         [
-            Intents.FLAGS.GUILDS, 
-            Intents.FLAGS.GUILD_MEMBERS,
-            Intents.FLAGS.GUILD_MESSAGES,
-            Intents.FLAGS.GUILD_VOICE_STATES
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildVoiceStates
         ] 
     });
 
