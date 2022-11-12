@@ -106,7 +106,7 @@ async function execute(interaction)
                 embed.setDescription("Een nieuwe stelling is geplaatst \n Gelieve te kiezen uit " + up + " (Upvote) en " + down + " (Downvote)");
                 embed.setFooter({text: `${interaction.guild.members.cache.get(interaction.author.id).nickname}`, iconURL: user.avatarURL()});
                 embed.setTimestamp();
-                embed.setColor("RANDOM");
+                embed.setColor("Random");
                 embed.addFields(
                     { 
                         name: "\u200B", 
