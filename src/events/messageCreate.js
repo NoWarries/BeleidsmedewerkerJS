@@ -1,7 +1,7 @@
 import stopPhishing from "stop-discord-phishing";
 import * as infraction from "../handlers/ironDome.js";
 import * as db from "../handlers/database.js";
-import {MessageEmbed} from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { assignXP } from "../handlers/xpBottle.js";
 import * as config from "../../config/common.js";
 import "dotenv/config";
@@ -17,6 +17,10 @@ const name = "messageCreate";
  */
 async function execute(interaction)
 {
+    const { client } = await import("../main.js");   
+    const interactionChannel = interaction.channel;
+    const guildConfig = db.getTable("server", interaction.guild.id) || null;
+    
     /*
     Check if user whom send the message is a bot
 
@@ -31,7 +35,7 @@ async function execute(interaction)
     if(await phisingLinkTrue){
 
         infraction.deleteMesasge(interaction, "Phising link");
-        infraction.timeOut(interaction, 10, "Phising link");
+        infraction.timeOut(interaction, config.moderation.phisingLink, "Phising link");
 
         return; // Exit out of execution ( No further steps required)
     }
@@ -46,6 +50,7 @@ async function execute(interaction)
         });
 
     // Eval command for testing (will be moved later on)
+    // eslint-disable-next-line no-undef
     if ( interaction.author.id === process.env.OWNER_ID
         && interaction.content.startsWith("$eval```js")) {
 
@@ -55,27 +60,67 @@ async function execute(interaction)
 
         try {
             var evaled = eval(code);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
-                .addField(":outbox_tray: output: ", `\`\`\`js\n${clean(evaled)}\n\`\`\``)
+                .addField(":outbox_tray: output: ", `\`\`\`js\n${clean(evaled)}\n\`\`\``);
 
-            interaction.channel.send({embeds: [embed]})
+            interaction.channel.send({embeds: [embed]});
         } catch (err) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0x00A2E8)
                 .addField(":inbox_tray: Input: ", `\`\`\`${code}\`\`\``)
-                .addField(":outbox_tray: output: ", `\`\`\`${clean(err)}\`\`\``)
+                .addField(":outbox_tray: output: ", `\`\`\`${clean(err)}\`\`\``);
 
-            interaction.channel.send({embeds: [embed]})
+            interaction.channel.send({embeds: [embed]});
         }
+        // eslint-disable-next-line no-inner-declarations
         function clean(text) {
-            if (typeof(text) === 'string')
-                return text.replace(/`/g, '`' + String.fromCharCode(8203)).replace(/@/g, '@' + String.fromCharCode(8203));
+            if (typeof(text) === "string")
+                return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
             else
                 return text;
         }
     }
+
+    guildConfig.then(data => {
+        /*
+        If server has config
+        */
+        if(data !== null) {
+            /*
+            Check for voting channel
+            */
+            if (data.voteChannel === interactionChannel.id){ 
+                // Delete the message
+                interaction.delete();
+
+                // Emote reference variables
+                const up = "<:upvote:819303307033444363>";
+                const down = "<:downvote:819304367806087189>";
+
+                const embed = new EmbedBuilder();
+                const user = client.users.cache.get(interaction.author.id);
+
+                embed.setTitle("Stelling en Stemming [i]");
+                embed.setDescription("Een nieuwe stelling is geplaatst \n Gelieve te kiezen uit " + up + " (Upvote) en " + down + " (Downvote)");
+                embed.setFooter({text: `${interaction.guild.members.cache.get(interaction.author.id).nickname}`, iconURL: user.avatarURL()});
+                embed.setTimestamp();
+                embed.setColor("Random");
+                embed.addFields(
+                    { 
+                        name: "\u200B", 
+                        value: "```" + interaction.content + "```",
+                        inline: false
+                    }
+                );
+                interaction.channel.send({ embeds: [embed] })
+                    .then(message => message.react(up))
+                    .then(res => res.message.react(down));
+            }
+        }
+    });
+        
 }
 
 /**

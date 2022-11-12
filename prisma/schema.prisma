@@ -9,16 +9,16 @@ datasource db {
 
 // Model
 
-// Server configuration
+// Sever (Guild) configuration 
 model Server {
-  id String @id @unique
+  id String @id @unique // relation scalar field 
 
-  loggingChannel Int @unique 
+  loggingChannel String? 
+  voteChannel String? 
 }
 
-
 model User {
-  id String @id @unique
+  id String @id // relation scalar field 
   firstSeen DateTime @default(now())
 
   perms Int @default(1)
@@ -28,6 +28,7 @@ model User {
   // User might have progress (level/xp) information
   progress Progress?
 }
+
 
 model Activity {
   id String @id @unique // relation scalar field 
