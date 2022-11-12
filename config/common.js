@@ -7,11 +7,12 @@ import ip from "ip";
  *  import * as config from "../../config/common.js";
  */
 
-var bot = {
+// eslint-disable-next-line no-unused-vars
+const bot = {
     "name": "Beleidsmederwerker",
-}
+};
 
-var guild = {
+const guild = {
 
     // Name of the guild
     "name": "Verenigd Havistisch Genootschap",
@@ -43,14 +44,15 @@ var guild = {
 
 class Api {
     constructor(port) {
+        this.root = "/v1",
         this.url = `http://${ip.address()}`,
         this.port =  port,
-        this.endpoint = `${this.url}:${this.port}/v1`
+        this.endpoint = `${this.url}:${this.port}/v1`;
     }
 }
 const api = new Api(28883);
 
-var xp = {
+const xp = {
     
     // xp to give out on message
     "message": {
@@ -65,7 +67,7 @@ var xp = {
 
 };
 
-var colors = {
+const colors = {
     /*
     Main colors to use in embed
     */
@@ -77,10 +79,17 @@ var colors = {
 
 };
 
+// Defines various variables for moderation actions
+const moderation = {
+    // time in seconds to timeout a user for sending a phising link
+    "phisingLink": 120,
+};
+
 export {
     colors,
     guild,
     api,
-    xp
+    xp,
+    moderation
 };
 
