@@ -1,4 +1,4 @@
-name: "🔍 eslint scan"
+name: "🔍 Code analysis"
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   eslint:
-    name: "🔍 eslint scanning"
+    name: "🔍 Scan with eslint"
     runs-on: ubuntu-latest
     permissions:
       contents: read
