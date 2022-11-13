@@ -8,6 +8,7 @@
     "run": "node --experimental-json-modules index.js",
     "run:dev": "nodemon --experimental-json-modules index.js ",
     "register": "node register.js",
+    "eslint": "npx eslint . --config .eslintrc.json",
     "deploy": "node deploy.js",
     "prisma:push": "npx prisma db push",
     "prisma:generate": "npx prisma generate",
