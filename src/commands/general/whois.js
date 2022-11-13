@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import * as config from "../../config/common.js";
+import * as config from "../../../config/common.js";
 import { EmbedBuilder } from "discord.js";
 import fetch from "node-fetch";
 
@@ -13,8 +13,8 @@ let data = new SlashCommandBuilder()
     );
 
 async function execute(interaction) {
-    const { ensureRecord } = await import("../handlers/database.js");
-    const { client } = await import("../main.js");
+    const { ensureRecord } = await import("../../handlers/database.js");
+    const { client } = await import("../../main.js");
     const user = interaction.options.getUser("user") || interaction.user;
     const userID = user.id;
 
@@ -49,54 +49,54 @@ async function execute(interaction) {
                 .setTitle(`${config.guild.shorthand} - ${user.username}`)
                 .setColor(config.colors.default)
                 .setThumbnail(user.avatarURL())
-                .addFields(                    
-                    { 
-                        name: "Gebruikersnaam", 
+                .addFields(
+                    {
+                        name: "Gebruikersnaam",
                         value: `${user.username}#${user.discriminator}`,
                         inline: true
                     },
-                    { 
-                        name: "Naam", 
+                    {
+                        name: "Naam",
                         value: guild.members.cache.get(userID).nickname,
                         inline: true
                     },
-                    { 
-                        name: "ID", 
+                    {
+                        name: "ID",
                         value: user.id,
                         inline: true
                     },
-                    { 
-                        name: `\u200B \n ${bar}  ${percentageShort} %`, 
+                    {
+                        name: `\u200B \n ${bar}  ${percentageShort} %`,
                         value: "\u200B",
                         inline: false
                     },
-                    { 
-                        name: "Level", 
+                    {
+                        name: "Level",
                         value: `${data.progress.level}`,
                         inline: true
                     },
-                    { 
-                        name: "Experience", 
+                    {
+                        name: "Experience",
                         value: `(${data.relativeProgress.earned}/${data.relativeProgress.needed})`,
                         inline: true
                     },
-                    { 
-                        name: "Needed", 
+                    {
+                        name: "Needed",
                         value: `${data.relativeProgress.togo}`,
                         inline: true
                     },
-                    { 
-                        name: "\u200B", 
+                    {
+                        name: "\u200B",
                         value: "\u200B",
                         inline: false
                     },
-                    { 
-                        name: "Messages", 
+                    {
+                        name: "Messages",
                         value: data.activity.messages.toString(),
                         inline: true
                     },
-                    { 
-                        name: "Minutes", 
+                    {
+                        name: "Minutes",
                         value: data.activity.minutes.toString(),
                         inline: true
                     }
