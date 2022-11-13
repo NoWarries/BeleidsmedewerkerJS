@@ -23,13 +23,13 @@ async function execute(interaction) {
         .then(res => res.json()).then(data => {
 
             /*
-            Given is that data.progress.relative.togo is the amount of xp togo for the next level
-            Given is that data.progress.relative.earned is the amount of xp earned for the current level
-            Given is that data.progress.relative.needed is the amount of xp needed for the relative level
+            Given is that data.relativeProgress.togo is the amount of xp togo for the next level
+            Given is that data.relativeProgress.earned is the amount of xp earned for the current level
+            Given is that data.relativeProgress.needed is the amount of xp needed for the relative level
 
             Calculate the percentage past for this level
              */
-            const percentage = (data.progress.relative.earned / data.progress.relative.needed) * 100;
+            const percentage = (data.relativeProgress.earned / data.relativeProgress.needed) * 100;
             // Round percentage to 2 decimal places
             const percentageShort = Math.round(percentage * 100) / 100;
 
@@ -77,12 +77,12 @@ async function execute(interaction) {
                     },
                     { 
                         name: "Experience", 
-                        value: `(${data.progress.relative.earned}/${data.progress.relative.needed})`,
+                        value: `(${data.relativeProgress.earned}/${data.relativeProgress.needed})`,
                         inline: true
                     },
                     { 
                         name: "Needed", 
-                        value: `${data.progress.relative.togo}`,
+                        value: `${data.relativeProgress.togo}`,
                         inline: true
                     },
                     { 
