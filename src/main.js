@@ -3,14 +3,14 @@ import { Client, GatewayIntentBits, Collection } from "discord.js";
 import fs from "fs";
 
 const client = new Client(
-    { intents: 
+    { intents:
         [
             GatewayIntentBits.Guilds,
             GatewayIntentBits.GuildMembers,
             GatewayIntentBits.GuildMessages,
             GatewayIntentBits.MessageContent,
             GatewayIntentBits.GuildVoiceStates
-        ] 
+        ]
     });
 
 /**
@@ -80,7 +80,6 @@ client.on("interactionCreate", async interaction => {
     }
 });
 
-// eslint-disable-next-line no-undef
 client.login(process.env.TOKEN);
 
 export {

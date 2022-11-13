@@ -4,7 +4,7 @@
 
 Yet another discord bot. Made specifically for single server use.
 
-with DiscordJS v13 and slash commands implemented
+with DiscordJS v14 and slash commands implemented
 
 > Keep in mind this code is not made with the intention to be scalable or easily implementable.
 > But **sharing is caring ❤** ️
@@ -54,6 +54,12 @@ Including but not limited to : events, handlers and triggers
     /main.js/
         
     /**
+     * The api folder is used/contains the api specification details
+     * This can be routes/middleware/controllers etc.
+     */
+    /api/
+
+    /**
      * Cogs (gears) are execute on run scripts.
      * They become and stay available/running on application start.
      * Generally not meant to be called. Service as is
@@ -63,6 +69,7 @@ Including but not limited to : events, handlers and triggers
      * - x time passed event
      */
     /cogs/
+
     /**
      * Commands are trigers that are executed on a command (by user)
      * Listeneners are created on application start up.
@@ -96,11 +103,17 @@ Including but not limited to : events, handlers and triggers
     /**
      * Handlers are common functions that can be used by multiple events.
      * In various use cases. Not limited to one.
-     * 
+     *
      * Example
      * - getting database information
      * - sending out messages to configured channels
      */
     /handlers/
+
+    /**
+     * Addition to the database handler, centralised way to take out database from Prisma
+     * Like this specifcation details can be stored seperated in the repository instead if the service
+     */
+    /repository/
 ```
 </details>

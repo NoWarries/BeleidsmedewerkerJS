@@ -4,8 +4,6 @@ import "moment-duration-format";
 import { EmbedBuilder } from "discord.js";
 import * as config from "../../config/common.js";
 
-
-
 let data = new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Send a ping to the bot");

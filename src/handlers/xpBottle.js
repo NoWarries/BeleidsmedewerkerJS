@@ -1,5 +1,4 @@
 import { addLevel, addXP } from "./database.js";
-import ip from "ip";
 import * as config from "../../config/common.js";
 import fetch from "node-fetch";
 import {announceLevelUp} from "./communicator.js";
