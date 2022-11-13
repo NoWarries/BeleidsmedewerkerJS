@@ -13,11 +13,9 @@ const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsW
         commands.push(data.toJSON());
     }
 })().then( () => {
-    // eslint-disable-next-line no-undef
     const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
     (async () => {
         try {
-            // eslint-disable-next-line no-undef
             await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands })
                 .then(() => console.log("✔️  => Commands registered"))
                 .catch(console.error);

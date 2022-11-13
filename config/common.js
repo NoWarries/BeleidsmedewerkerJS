@@ -3,14 +3,14 @@ import ip from "ip";
 /** Common configuration file
  *  Should always be aproached as `config
  *
- *  Suggested import 
+ *  Suggested import
  *  import * as config from "../../config/common.js";
  */
 
-// eslint-disable-next-line no-unused-vars
-const bot = {
-    "name": "Beleidsmederwerker",
-};
+
+// const bot = {
+//     "name": "Beleidsmederwerker",
+// };
 
 const guild = {
 
@@ -39,7 +39,7 @@ const guild = {
         "leave": "561916667236581377",
 
     }
-    
+
 };
 
 class Api {
@@ -53,7 +53,7 @@ class Api {
 const api = new Api(28883);
 
 const xp = {
-    
+
     // xp to give out on message
     "message": {
         "min" : 1,
