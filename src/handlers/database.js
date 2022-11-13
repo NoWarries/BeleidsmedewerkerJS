@@ -144,28 +144,4 @@ async function getTable(table, id) {
     });
 }
 
-/**
- * Get [level = xp] table respectively
- */
-async function getLevelTable() {
-    return await prisma.levels.findMany();
-}
-
-/**
- * Get user object from given id
- * @param {string} id 
- */
-async function getUser(id) {
-    return await prisma.user.findUnique({
-        where: {
-            id: id,
-        },
-        include: {
-            activity: true,
-            progress: true,
-        },
-    });
-}
-
-
-export { getTable, getUser, incrementMessage, getLevelTable, ensureRecord, incrementMinute, addXP, addLevel };
+export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel };
