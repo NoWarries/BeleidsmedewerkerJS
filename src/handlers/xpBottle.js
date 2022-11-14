@@ -17,16 +17,16 @@ function determineXP(min, max) {
 
 /**
  * assignXP to user id
- * @param {string} id 
- * @param {[number, number]} param1 
+ * @param {string} id
+ * @param {[number, number]} param1
  */
 function assignXP(id, [min, max]) {
     const xp = determineXP(min, max);
     addXP(id, xp).then(() => {
         fetch(`${config.api.endpoint}/user/${id}`).then(res => res.json()).then(data => {
-            
+
             // if xp required has been reached
-            if(data.progress.relative.togo <= 0) {
+            if(data.relativeProgress.togo <= 0) {
                 // add level
                 announceLevelUp(id, config.guild.channels.levelup, config.guild.id, data.progress.level+1).then(() =>
                     addLevel(id)
