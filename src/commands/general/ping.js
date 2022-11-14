@@ -5,7 +5,7 @@ import { EmbedBuilder } from "discord.js";
 import * as config from "../../../config/common.js";
 
 let data = new SlashCommandBuilder()
-    .setName("ping")
+    .setName("ping") 
     .setDescription("Send a ping to the bot");
 
 async function execute(interaction) {

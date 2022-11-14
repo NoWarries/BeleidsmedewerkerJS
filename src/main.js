@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { Client, GatewayIntentBits, Collection } from "discord.js";
 import { readdirSync } from "fs";
-import {extractFilesRecursively} from "./util/reader.js";
+import { extractFilesRecursively } from "./handlers/reader.js";
 
 const client = new Client(
     { intents:
@@ -74,7 +74,10 @@ client.on("interactionCreate", async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(interaction);
+        await command.execute(
+            interaction,
+            client
+        );
     } catch (error) {
         console.error(error);
         return interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
