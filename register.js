@@ -1,14 +1,13 @@
 import "dotenv/config";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import fs from "fs";
+import {extractFilesRecursively} from "./src/handlers/reader.js";
 
 const commands = [];
-const commandFiles = fs.readdirSync("./src/commands/").filter(file => file.endsWith(".js"));
+const commandFiles = await extractFilesRecursively("./src/commands");
 (async () => {
-    console.log(commandFiles);
     for (const file of commandFiles) {
-        const { data } = await import(`./src/commands/${file}`);
+        const { data } = await import(`./${file}`);
         console.log(`[ ✍️  ] Registering : ${file}`);
         commands.push(data.toJSON());
     }

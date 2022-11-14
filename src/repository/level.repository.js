@@ -1,18 +1,17 @@
-import { PrismaClient } from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 export default class levelRepository {
     static async findAll() {
-        const levels = prisma.levels.findMany({});
-        return levels;
+        return prisma.levels.findMany({});
     }
 
     static async findByLevel(level) {
-        const levels = prisma.levels.findUnique({
+        return prisma.levels.findUnique({
             where: {
                 level: parseInt(level),
             }
         });
-        return levels;
     }
 }

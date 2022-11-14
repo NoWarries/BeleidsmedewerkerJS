@@ -38,6 +38,13 @@ const guild = {
         // ID of the channel where the bot will post leave messages
         "leave": "561916667236581377",
 
+    },
+    /*
+    Role channels references
+    config.guild.roles.x
+     */
+    roles : {
+        "siege": "909758912763428874",
     }
 
 };

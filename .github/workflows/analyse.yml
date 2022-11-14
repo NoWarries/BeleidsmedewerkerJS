@@ -1,14 +1,14 @@
-name: "🔍 eslint scan"
+name: "🔍 Code analysis"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
   eslint:
-    name: "🔍 eslint scanning"
+    name: "🔍 Scan with eslint"
     runs-on: ubuntu-latest
     permissions:
       contents: read

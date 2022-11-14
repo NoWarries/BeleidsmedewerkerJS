@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { Client, GatewayIntentBits, Collection } from "discord.js";
-import fs from "fs";
+import { readdirSync } from "fs";
+import { extractFilesRecursively } from "./handlers/reader.js";
 
 const client = new Client(
     { intents:
@@ -17,7 +18,7 @@ const client = new Client(
  * Event handlers
  * Handles loading in event and listening to their occurrences
  */
-const events = fs.readdirSync("./src/events").filter((file) => file.endsWith(".js"));
+const events = readdirSync("./src/events").filter((file) => file.endsWith(".js"));
 try {
     (async () => {
         for (let event of events) {
@@ -43,7 +44,7 @@ try {
  * Load in cogs
  * Import / Execute on javascript execution
  */
-const gears = fs.readdirSync("./src/cogs").filter((file) => file.endsWith(".js"));
+const gears = readdirSync("./src/cogs").filter((file) => file.endsWith(".js"));
 for (let gear of gears) {
     console.log(`[ ⚙️ ] Preparing ${gear}`);
     import(`./cogs/${gear}`);
@@ -56,11 +57,11 @@ console.table(gears);
  * Loads in commands
  */
 client.commands = new Collection();
-const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
+const commandFiles = await extractFilesRecursively("./src/commands");
 (async () => {
     for (const file of commandFiles) {
         console.log(`[ 🤖 ] Preparing ${file}`);
-        const command = await import(`./commands/${file}`);
+        const command = await import(`../${file}`);
         client.commands.set(command.data.name, command);
     }
     console.log(`[ 🤖 ] ${commandFiles.length} Command(s) loaded successfully`);
@@ -73,7 +74,10 @@ client.on("interactionCreate", async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(interaction);
+        await command.execute(
+            interaction,
+            client
+        );
     } catch (error) {
         console.error(error);
         return interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
