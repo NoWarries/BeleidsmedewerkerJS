@@ -52,7 +52,7 @@ Including but not limited to : events, handlers and triggers
      * And handles all the logic
      */
     /main.js/
-        
+
     /**
      * The api folder is used/contains the api specification details
      * This can be routes/middleware/controllers etc.
@@ -103,7 +103,7 @@ Including but not limited to : events, handlers and triggers
     /**
      * Handlers are common functions that can be used by multiple events.
      * In various use cases. Not limited to one.
-     *
+     * 
      * Example
      * - getting database information
      * - sending out messages to configured channels
@@ -115,5 +115,16 @@ Including but not limited to : events, handlers and triggers
      * Like this specifcation details can be stored seperated in the repository instead if the service
      */
     /repository/
+
+    /**
+     * Subcommands are used to define various command subcommands
+     *  
+     *  a command might look like this
+     *  /animal monkey
+     *  
+     *  the corresponding subcommand file would be able to be found
+     *  /src/subcommands/animal/monkey
+     */
+    /subcommands/
 ```
 </details>
