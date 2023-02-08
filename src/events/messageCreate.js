@@ -1,4 +1,3 @@
-import stopPhishing from "stop-discord-phishing";
 import * as infraction from "../handlers/ironDome.js";
 import * as db from "../handlers/database.js";
 
@@ -6,6 +5,7 @@ import { assignXP } from "../handlers/xpBottle.js";
 import * as config from "../../config/common.js";
 import "dotenv/config";
 import {iniateVote} from "./messageCreate/voteChannel.js";
+import {checkMessage, checkMessageFull} from "./messageCreate/security.js";
 
 const once = false;
 const name = "messageCreate";
@@ -63,30 +63,6 @@ async function execute(interaction)
         }
     });
 
-}
-
-/**
- * Global default message scan / check
- *
- * @param {string} message
- * @returns {Promise<boolean>}
- */
-async function checkMessage (message) {
-    //check string on confirmed Phishing Domains
-    let isGrabber = await stopPhishing.checkMessage(message);
-    //Now you can do something with the Boolean Value
-    return isGrabber;
-}
-
-/**
- * @param {string} message
- * @returns {Promise<boolean>}
- */
-async function checkMessageFull (message) {
-    //check string on confirmed & not yet confirmed but suspicious Phishing Domains
-    let isGrabber = await stopPhishing.checkMessage(message);
-    //Now you can do something with the Boolean Value
-    return isGrabber;
 }
 
 
