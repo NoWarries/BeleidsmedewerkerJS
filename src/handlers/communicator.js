@@ -38,7 +38,11 @@ async function announceLevelUp(userID, channelID, guildID, level) {
     const embed = new EmbedBuilder()
         .setTitle("Progressie geen depressie [!]")
         .setDescription(`Hoera! <@${interaction.user.id}> heeft een nieuw niveau bereikt`)
-        .addField("\u200B", `Gefeliciteerd met het bereiken van niveau ${level} mogen er nog vele volgen 🙏`)
+        .addFields({
+            name: "\u200B",
+            value: `Gefeliciteerd met het bereiken van niveau ${level} mogen er nog vele volgen 🙏`,
+            inline: false
+        })
         .setThumbnail(interaction.user.displayAvatarURL())
         .setColor(config.colors.levelup);
 
