@@ -34,6 +34,6 @@
     "express": "^4.18.1",
     "nodemon": "^2.0.22",
     "prisma": "^4.9.0",
-    "ssh2-sftp-client": "^9.0.4"
+    "ssh2-sftp-client": "^9.1.0"
   }
 }
