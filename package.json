@@ -25,7 +25,7 @@
     "ip": "^1.1.8",
     "moment": "^2.29.3",
     "moment-duration-format": "^2.3.2",
-    "node-fetch": "^3.2.3",
+    "node-fetch": "^3.3.1",
     "stop-discord-phishing": "^0.3.3"
   },
   "devDependencies": {
