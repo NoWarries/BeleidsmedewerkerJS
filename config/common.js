@@ -38,6 +38,8 @@ const guild = {
         // ID of the channel where the bot will post leave messages
         "leave": "561916667236581377",
 
+        // ID of the channel where the bot will post vote results
+        "voteResults": "827525708791152700",
     },
     /*
     Role channels references
@@ -45,8 +47,15 @@ const guild = {
      */
     roles : {
         "siege": "909758912763428874",
+    },
+    /*
+    Emoji references
+    config.guild.emoji.x
+    */
+    emoji : {
+        "upvote": "819303307033444363",
+        "downvote": "819304367806087189",
     }
-
 };
 
 class Api {

@@ -26,8 +26,16 @@ model Vote {
   status String
   message String
 
+  chairManMessage String? 
+
+  up Int? @default(0)
+  down Int? @default(0)
+
   authorId String  
-  author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id], name: "author")
+
+  chairmanId String?
+  chairman User? @relation(fields: [chairmanId], references: [id], name: "chairman")
 }
 
 model User {
@@ -41,7 +49,9 @@ model User {
   // User might have progress (level/xp) information
   progress Progress?
   // User might have a vote
-  votes Vote[]
+  votes Vote[] @relation("author")
+  // User might have led a vote
+  chairManForVotes Vote[] @relation("chairman")
 }
 
 

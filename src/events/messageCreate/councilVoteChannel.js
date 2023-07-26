@@ -21,7 +21,7 @@ async function iniateCouncilVote(interaction) {
         iconURL: user.avatarURL()
     });
     embed.setTimestamp();
-    embed.setColor("#fff");
+    embed.setColor("#ff0000");
     embed.addFields(
         {
             name: "\u200B",

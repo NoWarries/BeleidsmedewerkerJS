@@ -1,4 +1,4 @@
-import stopPhishing from "stop-discord-phishing";
+import * as stopPhishing from "stop-discord-phishing";
 
 /**
  * Global default message scan / check

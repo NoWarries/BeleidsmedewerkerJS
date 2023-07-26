@@ -157,7 +157,6 @@ async function createVote(
     status,
     author
 ) {
-    console.log(id, channelId, messageId);
     return await prisma.vote.create({
         data: {
             id: id,
@@ -172,4 +171,35 @@ async function createVote(
     });
 }
 
-export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel, createVote };
+/**
+ * 
+ * @param {string} id 
+ * @param {string} status 
+ * @param {string} chairmanId 
+ * @param {string} chairmanMessage 
+ * @returns 
+ */
+async function updateVote(
+    id,
+    status,
+    up, 
+    down,
+    chairmanId,
+    chairmanMessage
+) {
+    return await prisma.vote.update({
+        where: {
+            id: id,
+        },
+        data: {
+            status: status,
+            up: up,
+            down: down,
+            chairmanId: chairmanId,
+            chairManMessage: chairmanMessage,
+        },
+    });
+}
+
+
+export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel, createVote, updateVote };
