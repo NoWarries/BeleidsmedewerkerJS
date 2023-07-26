@@ -15,6 +15,19 @@ model Server {
 
   loggingChannel String? 
   voteChannel String? 
+  voteCouncilChannel String?
+}
+
+model Vote {
+  id String @id
+  channelId String
+  messageId String
+
+  status String
+  message String
+
+  authorId String  
+  author User @relation(fields: [authorId], references: [id])
 }
 
 model User {
@@ -27,6 +40,8 @@ model User {
   activity Activity?
   // User might have progress (level/xp) information
   progress Progress?
+  // User might have a vote
+  votes Vote[]
 }
 
 

@@ -144,4 +144,32 @@ async function getTable(table, id) {
     });
 }
 
-export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel };
+/**
+ * Create vote
+ * @param {string} channelId
+ * @param {string} messageId
+ */
+async function createVote(
+    id, 
+    channelId, 
+    messageId,
+    message,
+    status,
+    author
+) {
+    console.log(id, channelId, messageId);
+    return await prisma.vote.create({
+        data: {
+            id: id,
+            channelId: channelId,
+            messageId: messageId,
+
+            message : message,
+            status : status,
+
+            authorId : author,
+        },
+    });
+}
+
+export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel, createVote };

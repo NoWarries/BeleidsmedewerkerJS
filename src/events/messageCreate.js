@@ -5,6 +5,7 @@ import { assignXP } from "../handlers/xpBottle.js";
 import * as config from "../../config/common.js";
 import "dotenv/config";
 import {iniateVote} from "./messageCreate/voteChannel.js";
+import { iniateCouncilVote } from "./messageCreate/councilVoteChannel.js";
 import {checkMessage, checkMessageFull} from "./messageCreate/security.js";
 
 const once = false;
@@ -59,6 +60,8 @@ async function execute(interaction)
             */
             if (data.voteChannel === interactionChannel.id){
                 iniateVote(interaction);
+            } else if (data.voteCouncilChannel === interactionChannel.id){
+                iniateCouncilVote(interaction);
             }
         }
     });
