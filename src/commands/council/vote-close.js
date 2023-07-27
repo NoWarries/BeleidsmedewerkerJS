@@ -17,7 +17,7 @@ let data = new SlashCommandBuilder()
             .setName("id")
             .setDescription("The ID of the vote to close")
             .setRequired(true)
-    )
+            .setAutocomplete(true))
     .addStringOption(option =>
         option
             .setName("action")
@@ -29,7 +29,7 @@ let data = new SlashCommandBuilder()
                 { name: "Adopted", value: "adopted" },
             )
     )
-    .addStringOption  (option =>
+    .addStringOption(option =>
         option.setName("reason")
             .setDescription("Optional elaboration on the vote result")
             .setRequired(false)
@@ -42,8 +42,27 @@ let data = new SlashCommandBuilder()
             .setMinValue(0)
     );
 
-async function execute(interaction) {
-    const percentage = interaction.options.getInteger("percentage") || 50;
+// add autocomplete for vote id
+async function autocomplete(interaction) {
+    const focusedValue = interaction.options.getFocused();
+
+    const choices = await VoteRepository.findAllByStatus("Pending").then(res => {
+        return res.map(vote => vote.id);
+    });
+
+    console.log(choices);
+
+    const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+    console.log(filtered);
+
+
+    await interaction.respond(
+        filtered.map(choice => ({ name: choice, value: choice })),
+    );
+}
+
+async function execute(interaction) {   
+    const percentage = interaction.options.getInteger("percentage") || 51;
 
     VoteRepository.findById(interaction.options.getString("id")).then(res => {
         // Check if vote exists
@@ -169,14 +188,18 @@ async function execute(interaction) {
                         
                         const paperTrail = new EmbedBuilder();
                         paperTrail.setTimestamp();
+                        paperTrail.setFooter({
+                            text: embed.footer.text,
+                            iconUrl: embed.footer.iconUrl
+                        });
                         paperTrail.addFields(
                             {
                                 name: "\u200B",
-                                value: `**Motion and Vote [i]** \n${embed.fields[0].value}`,
+                                value: `**Motion and Vote** \n${embed.fields[0].value}`,
                                 inline: false
                             },
                         );
-                    
+                        paperTrail.setDescription("**Vote has been resolved ** \n " + embed.description);
                         switch(action) {
                         case "cancelled":
                             paperTrail.setTitle("Cancelled by administrator");
@@ -240,4 +263,4 @@ async function execute(interaction) {
 }
 
 
-export { data, execute };
+export { data, execute, autocomplete };

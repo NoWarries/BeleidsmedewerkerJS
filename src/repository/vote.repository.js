@@ -10,4 +10,11 @@ export default class VoteRepository {
             }
         });
     }
+    static async findAllByStatus(status) {
+        return prisma.vote.findMany({
+            where: {
+                status: status,
+            }
+        });
+    }
 }
