@@ -201,5 +201,21 @@ async function updateVote(
     });
 }
 
+async function updateVoteCount(
+    id,
+    up,
+    down
+) {
+    return await prisma.vote.update({
+        where: {
+            id: id,
+        },
+        data: {
+            up: up,
+            down: down,
+        },
+    });
+}
 
-export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel, createVote, updateVote };
+
+export { getTable, incrementMessage, ensureRecord, incrementMinute, addXP, addLevel, createVote, updateVote, updateVoteCount };

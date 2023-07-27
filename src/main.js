@@ -1,16 +1,22 @@
 import "dotenv/config";
-import { Client, GatewayIntentBits, Collection } from "discord.js";
+import { Client, GatewayIntentBits, Collection, Options, Partials } from "discord.js";
 import { readdirSync } from "fs";
 import { extractFilesRecursively } from "./handlers/reader.js";
 
 const client = new Client(
-    { intents:
+    { 
+        makeCache: Options.cacheWithLimits({
+            ReactionManager: 200,
+        }),
+        partials: [Partials.Message, Partials.Channel, Partials.Reaction],
+        intents:
         [
             GatewayIntentBits.Guilds,
             GatewayIntentBits.GuildMembers,
             GatewayIntentBits.GuildMessages,
             GatewayIntentBits.MessageContent,
-            GatewayIntentBits.GuildVoiceStates
+            GatewayIntentBits.GuildVoiceStates,
+            GatewayIntentBits.GuildMessageReactions
         ]
     });
 

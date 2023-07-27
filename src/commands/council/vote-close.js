@@ -80,8 +80,9 @@ async function execute(interaction) {
                 const embed = vote.embeds[0];
 
                 // get reactions
-                const up = vote.reactions.cache.get(guild.emoji.upvote).count - 1;
-                const down = vote.reactions.cache.get(guild.emoji.downvote).count - 1;
+                const up = vote.reactions.cache.find((reaction) => reaction.emoji.id === guild.emoji.upvote).count - 1;
+                const down = vote.reactions.cache.find((reaction) => reaction.emoji.id === guild.emoji.downvote).count - 1;
+
 
                 const total = up + down;
                 const ratio = up + " / " + down;
@@ -179,16 +180,13 @@ async function execute(interaction) {
                         switch(action) {
                         case "cancelled":
                             paperTrail.setTitle("Cancelled by administrator");
-                            removeReactions(vote);
                             vote.react("🗑️");
                             break;
                         case "adopted":
                             paperTrail.setTitle("Adopted by administrator");
-                            removeReactions(vote);
                             vote.react("⏩");
                             break;
                         default:
-                            removeReactions(vote);
                             paperTrail.setDescription("**Vote has been resolved ** \n " + embed.description + " \n  \n" + up / total * 100 + "% / " + down / total * 100 + "% (" + ratio + ")");
                             if (up / total * 100 >= percentage) {
                                 paperTrail.setTitle("Adopted");
@@ -225,7 +223,7 @@ async function execute(interaction) {
                             interaction.user.id,
                             reason,
                         );
-
+                        removeReactions(vote);        
                         interaction.deleteReply();
                     }
                     else if (collection.first().customId === "vote-close-cancel") {
