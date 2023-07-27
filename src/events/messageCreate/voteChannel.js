@@ -1,4 +1,5 @@
 import {EmbedBuilder} from "discord.js";
+import { guild } from "../../../config/common.js";
 
 async function iniateVote(interaction) {
     const {client} = await import("../../main.js");
@@ -7,14 +8,14 @@ async function iniateVote(interaction) {
     interaction.delete();
 
     // Emote reference variables
-    const up = "<:upvote:819303307033444363>";
-    const down = "<:downvote:819304367806087189>";
+    const up = `<:upvote:${guild.emoji.upvote}>`;
+    const down = `<:downvote:${guild.emoji.downvote}>`;
 
     const embed = new EmbedBuilder();
     const user = client.users.cache.get(interaction.author.id);
 
-    embed.setTitle("Stelling en Stemming [i]");
-    embed.setDescription("Een nieuwe stelling is geplaatst \n Gelieve te kiezen uit " + up + " (Upvote) en " + down + " (Downvote)");
+    embed.setTitle("Poll and Voting [i]");
+    embed.setDescription("A new poll has been posted. \n Please choose between " + up + " (Upvote) and " + down + " (Downvote)");
     embed.setFooter({
         text: `${interaction.guild.members.cache.get(interaction.author.id).nickname}`,
         iconURL: user.avatarURL()

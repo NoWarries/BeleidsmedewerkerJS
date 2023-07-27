@@ -1,5 +1,6 @@
 import {EmbedBuilder} from "discord.js";
 import { createVote } from "../../handlers/database.js";
+import { guild } from "../../../config/common.js";
 
 async function iniateCouncilVote(interaction) {
     const {client} = await import("../../main.js");
@@ -8,8 +9,8 @@ async function iniateCouncilVote(interaction) {
     interaction.delete();
 
     // Emote reference variables
-    const up = "<:upvote:819303307033444363>";
-    const down = "<:downvote:819304367806087189>";
+    const up = `<:upvote:${guild.emoji.upvote}>`;
+    const down = `<:downvote:${guild.emoji.downvote}>`;
 
     const embed = new EmbedBuilder();
     const user = client.users.cache.get(interaction.author.id);
