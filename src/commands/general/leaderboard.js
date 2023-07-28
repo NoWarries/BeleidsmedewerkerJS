@@ -65,7 +65,7 @@ const execute = async (interaction) => {
             take: DISPLAY_LIMIT,
             skip: (page - 1) * DISPLAY_LIMIT,
             orderBy: {
-                level: "desc", // Change "xp" to "level"
+                xp: "desc", // Change "xp" to "level"
             },
             include: {
                 user: true,
