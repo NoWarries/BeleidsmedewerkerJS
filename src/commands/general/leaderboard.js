@@ -60,7 +60,7 @@ const execute = async (interaction) => {
     const page = interaction.options.getInteger("page") || 1;
 
     switch (type) {
-    case "level":
+    case "level": {
         const levelUsers = await prisma.progress.findMany({
             take: DISPLAY_LIMIT,
             skip: (page - 1) * DISPLAY_LIMIT,
@@ -88,8 +88,9 @@ const execute = async (interaction) => {
             embeds: [levelEmbed],
         });
         break;
+    }
     case "messages":
-    case "minutes":
+    case "minutes" : {
         const activityType = type === "messages" ? "messages" : "minutes";
         const activityUsers = await prisma.activity.findMany({
             take: DISPLAY_LIMIT,
@@ -118,6 +119,7 @@ const execute = async (interaction) => {
             embeds: [activityEmbed],
         });
         break;
+    }
     default:
         await interaction.reply({
             content: "Invalid type",
