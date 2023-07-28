@@ -1,8 +1,11 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import VoteRepository from "../../repository/vote.repository.js";
-import { ButtonBuilder, ButtonStyle, EmbedBuilder, ActionRowBuilder } from "discord.js";
+import { ButtonBuilder, ButtonStyle, EmbedBuilder, ActionRowBuilder, PermissionFlagsBits } from "discord.js";
 import { updateVote } from "../../handlers/database.js";
 import { guild } from "../../../config/common.js";
+
+import {PrismaClient} from "@prisma/client";
+const prisma = new PrismaClient();
 
 function removeReactions(message) {
     message.reactions.cache.get(guild.emoji.upvote).remove();
@@ -12,6 +15,7 @@ function removeReactions(message) {
 let data = new SlashCommandBuilder()
     .setName("vote-close") 
     .setDescription("Close a council vote")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption(option => 
         option
             .setName("id")
@@ -46,14 +50,25 @@ let data = new SlashCommandBuilder()
 async function autocomplete(interaction) {
     const focusedValue = interaction.options.getFocused();
 
-    const choices = await VoteRepository.findAllByStatus("Pending").then(res => {
+    /*
+     * Return the 25 first votes that start with the focused value
+     * Are pending
+     * 
+     */
+    const choices = await prisma.vote.findMany({
+        where: {
+            id: {
+                startsWith: focusedValue,
+            },
+            status: "Pending",
+        },
+        take: 25,
+    }).then(res => {
         return res.map(vote => vote.id);
     });
-
-    console.log(choices);
+    
 
     const filtered = choices.filter(choice => choice.startsWith(focusedValue));
-    console.log(filtered);
 
 
     await interaction.respond(
@@ -64,7 +79,7 @@ async function autocomplete(interaction) {
 async function execute(interaction) {   
     const percentage = interaction.options.getInteger("percentage") || 51;
 
-    VoteRepository.findById(interaction.options.getString("id")).then(res => {
+    VoteRepository.findById(interaction.options.getString("id")).then((res) => {
         // Check if vote exists
         if(res == null) {
             const embed = new EmbedBuilder()
