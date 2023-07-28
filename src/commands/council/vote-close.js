@@ -31,6 +31,7 @@ let data = new SlashCommandBuilder()
                 { name: "Democratic", value: "Democratic" },
                 { name: "Cancelled", value: "cancelled" },
                 { name: "Adopted", value: "adopted" },
+                { name: "Delete", value: "delete" },
             )
     )
     .addStringOption(option =>
@@ -199,7 +200,36 @@ async function execute(interaction) {
 
                 collector.on("end", (collection) => {
                     if (collection.first().customId === "vote-close-confirm") {
-                        // disable buttons
+
+                        // if we are deleting the vote
+                        if(action === "delete") {
+
+                            // delete the vote from the database
+                            console.log("Deleting vote " + interaction.options.getString("id"));
+                            updateVote(
+                                interaction.options.getString("id"), 
+                                "Deleted", 
+                                up,
+                                down,
+                                interaction.user.id,
+                                reason,
+                            );
+                            
+                            vote.delete();
+                            
+                            const embed = new EmbedBuilder()
+                                .setTitle("Vote deleted")
+                                .setDescription("The vote with the ID ``" + interaction.options.getString("id") + "`` was deleted")
+                                .setColor("#ff0000");
+                            
+                            interaction.editReply({
+                                embeds: [embed],
+                                components: []
+                            });
+
+                            return;
+                        } 
+
                         
                         const paperTrail = new EmbedBuilder();
                         paperTrail.setTimestamp();
