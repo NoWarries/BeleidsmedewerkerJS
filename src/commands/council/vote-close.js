@@ -119,7 +119,8 @@ async function execute(interaction) {
                 const down = vote.reactions.cache.find((reaction) => reaction.emoji.id === guild.emoji.downvote).count - 1;
 
 
-                const total = up + down;
+                const total = Math.max(up + down, 1);
+
                 const ratio = up + " / " + down;
 
                 const score = up / total * 100 + " / " +  down / total * 100;
