@@ -4,7 +4,7 @@ import { readdirSync } from "fs";
 import { extractFilesRecursively } from "./handlers/reader.js";
 
 const client = new Client(
-    { 
+    {
         makeCache: Options.cacheWithLimits({
             ReactionManager: 200,
         }),
@@ -87,7 +87,7 @@ client.on("interactionCreate", async interaction => {
         } catch (error) {
             console.error(error);
         }
-    } else if (!interaction.isCommand()) { return } else {
+    } else if (!interaction.isCommand()) { return; } else {
         const command = client.commands.get(interaction.commandName);
 
         if (!command) return;
