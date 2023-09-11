@@ -1,8 +1,6 @@
 import cron from "node-cron";
 import morning_hi_messages from "../lib/morningRoutine/morning_hi_messages.js";
 import weatherEmbed from "../handlers/embeds/weatherEmbed.js";
-import _ from "lodash";
-import e from "express";
 
 // import client
 const { client } = await import("../main.js");
@@ -19,12 +17,16 @@ task.start();
 // Functionality
 async function goodMorning(channelID = "561638595748823040") {
 
-    // Prepare date and time
+    // Prepare date
     const date = new Date();
-    const time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-    await client.channels.cache.get(channelID).send(morning_hi_messages[Math.floor(Math.random() * morning_hi_messages.length)]);
-    
+    // If its not morning, return
+    if (date.getHours() < 12) { 
+        client.channels.cache.get(channelID).send(morning_hi_messages[Math.floor(Math.random() * morning_hi_messages.length)]);
+    } else {
+        client.channels.cache.get(channelID).send("Goedemo... oh wacht, is het alweer zo laat? :sob:");
+    }
+
     // Send weather embed
     weatherEmbed(process.env.OPENWEATHERMAP_LAT, process.env.OPENWEATHERMAP_LON).then(embed => {
         client.channels.cache.get(channelID).send({ embeds: [embed] });
