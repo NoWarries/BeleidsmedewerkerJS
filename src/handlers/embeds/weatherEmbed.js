@@ -1,4 +1,7 @@
-import fetch from "node-fetch";
+import { fetchBuilder, MemoryCache } from "node-fetch-cache";
+const fetch = fetchBuilder.withCache(new MemoryCache({
+    ttl: 120 * 60 * 1000 // 2 hours 
+}));
 export default async function weatherEmbed(lat, lon) {
     // fetch weather openweathermap
     const weather_url = `https://api.openweathermap.org/data/2.5/onecall?exclude=minutely,hourly&lat=${lat}&lon=${lon}&units=metric&appid=${process.env.OPENWEATHERMAP_API_KEY}&lang=nl`;
