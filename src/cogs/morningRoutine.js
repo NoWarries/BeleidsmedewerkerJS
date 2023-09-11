@@ -27,6 +27,11 @@ async function goodMorning(channelID = "561638595748823040") {
         client.channels.cache.get(channelID).send("Goedemo... oh wacht, is het alweer zo laat? :sob:");
     }
 
+    // If its friday, send a special message
+    if (date.getDay() === 5) {
+        client.channels.cache.get(channelID).send("**Het is vrijdag! :partying_face:**");
+    }
+
     // Send weather embed
     weatherEmbed(process.env.OPENWEATHERMAP_LAT, process.env.OPENWEATHERMAP_LON).then(embed => {
         client.channels.cache.get(channelID).send({ embeds: [embed] });
