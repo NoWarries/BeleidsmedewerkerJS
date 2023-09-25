@@ -23,7 +23,7 @@ async function execute(interaction)
             /*
             Check if within voting channel
             */
-            if (data.voteChannel === interaction.message.channelId || data.councilVoteChannel === interaction.message.channelId){
+            if (data.voteChannel === interaction.message.channelId || data.voteCouncilChannel === interaction.message.channelId){
                 // If not an upvote or downvote
 
                 // fetch the message
