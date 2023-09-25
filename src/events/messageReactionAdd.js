@@ -42,7 +42,7 @@ async function execute(interaction)
                 });
 
                 // Reaction is not an upvote or downvote and bot did not add the reaction
-                if(interaction.emoji.id !== guild.emoji.upvote && interaction.emoji.id !== guild.emoji.downvote && !botAuthored) {
+                if(!botAuthored) {
 
                     // remove reaction
                     if(interaction.emoji.id !== null) {
