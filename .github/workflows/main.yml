@@ -5,6 +5,7 @@ env:
   SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
   CLIENT_ID: ${{ secrets.CLIENT_ID }}
   TOKEN: ${{ secrets.TOKEN }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
   
 on: 
   push:
