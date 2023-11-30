@@ -32,6 +32,11 @@ async function goodMorning(channelID = "561638595748823040") {
         client.channels.cache.get(channelID).send("**Het is vrijdag! :partying_face:**");
     }
 
+    // If its the first of the month, send a special message
+    if (date.getDate() === 1) {
+        client.channels.cache.get(channelID).send("Wake up, wake up, wake up, it's the first of the month! :moneybag:");
+    }
+
     // Send weather embed
     weatherEmbed(process.env.OPENWEATHERMAP_LAT, process.env.OPENWEATHERMAP_LON).then(embed => {
         client.channels.cache.get(channelID).send({ embeds: [embed] });
